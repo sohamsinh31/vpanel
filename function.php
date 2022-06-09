@@ -1,4 +1,5 @@
 <?php 
+		$id = $_SESSION['id'];
 		$con = mysqli_connect('localhost','root');
 		mysqli_select_db($con,'vpanel');
 function userimage() {
@@ -38,5 +39,19 @@ function userimage() {
 			  }
 			}
 		//}
+		}
+		function userim(){
+			$id = $_SESSION['id'];
+			$con = mysqli_connect('localhost','root');
+			mysqli_select_db($con,'vpanel');
+				$q = "SELECT * FROM `studentinfo` where id = '$id'";
+				$result = mysqli_query($con,$q);
+				$num = mysqli_num_rows($result);
+				$id = $_SESSION['id'];
+				if($num>0){
+					while($row = mysqli_fetch_assoc($result)){
+					  echo  "<img class='app_header_image' src='".$row['photourl']."' alt=''>";
+					}
+				}
 		}
 ?>

@@ -1,15 +1,12 @@
 <?php
-session_start();
-if(!isset($_SESSION['username'])){
- echo "not logged in";
-}
-else{
-    header('location:index.php');
-}
-$name = "hi i am soham";
-$name2 = explode(" ",$name);
-echo $name2[0];
-?>
+// session_start();
+// if(!isset($_SESSION['username'])){
+//  echo "not logged in";
+// }
+// else{
+    // header('location:index.php');
+// }
+// ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,6 +77,29 @@ echo $name2[0];
             <label>chemistry theorey:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_theorey" class="form-control"><label>Chemistry practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_practical" class="form-control">
             <br>
             <label>Total precentage(as per marksheet):</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="percentage" class="form-control">
+            <br>
+            <hr>
+            <label>For collage information</label>
+            <hr>
+            <label>Choose degree:</label>  
+<select name="degree">
+    <option value="BE/BTECH">B.E/B.TECH</option>
+    <option value="BSC">B.Sc</option>
+    <option value="DIPLOMA">Diploma</option>
+    </select>
+    <label>Choose branch:</label>  
+<select name="branch">
+    <option value="CSE">Computer science and engineering</option>
+    <option value="ITE">Information technology and engineering</option>
+    <option value="IT">Information technology</option>
+    <option value="CH">Chemical engineering</option>
+    <option value="CV">Civil engineering</option>
+    <option value="MH">Mechanical engineering</option>
+    <option value="CE">Computer engineering</option>
+    <option value="PE">Pharmasutical engineering</option>
+    </select>
+    <label>Acadamic year:20</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="year" class="form-control">
+
         </div>
             <br>
                 <span><a style="color:gold;" href="login.php">Already sign up in click to logged in</a></span>

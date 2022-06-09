@@ -219,6 +219,7 @@ Sidebar
             transition: var(--transition);
             cursor: pointer;
             color: var(--clr-red-dark);
+            float:right;
         }
 
         .close-btn:hover {
@@ -269,6 +270,7 @@ Sidebar
             left: 0;
             width: 100%;
             height: 100%;
+            background-color:#0e0e0e;
             display: grid;
             grid-template-rows: auto 1fr auto;
             row-gap: 1rem;
@@ -311,51 +313,70 @@ Sidebar
             width:56px;
             border-radius:100px;
         }
+        a {
+            color:inherit;
+        }
     </style>
 </head>
-
 <body>
     <div class="app_header">
     <button class="sidebar-toggle">
         <i class="fas fa-bars"></i>
     </button>
-    <h1>VPANEL</h1>
+    <h1><a href="index">VPANEL</a></h1>
     <br>
     <div class="right">
-    <img class="app_header_image" src="image.jpeg" alt="hi">
+        <?php 
+			$id = $_SESSION['id'];
+			$con = mysqli_connect('localhost','root');
+			mysqli_select_db($con,'vpanel');
+				$q = "SELECT * FROM `studentinfo` where id = '$id'";
+				$result = mysqli_query($con,$q);
+				$num = mysqli_num_rows($result);
+				$id = $_SESSION['id'];
+				if($num>0){
+					while($row = mysqli_fetch_assoc($result)){
+					  echo  "<img class='app_header_image' src='".$row['photourl']."' alt=''>";
+					}
+				}
+        ?>
+    <!-- <img class="app_header_image" src="image.jpeg" alt="hi"> -->
     </div>
     </div>
+    
     <aside class="sidebar">
         <div class="sidebar-header">
-            <img src="image.jpg" alt="">
-            <button class="close-btn"><i class="fas fa-times"></i></button>
+        <button class="close-btn"><i class="fas fa-times"></i></button>
         </div>
-        <img src="sujal.jpeg" height="50" width="50" class="image">
         <h6 style="text-align: center;">student name</h6>
 
         <ul class="links">
             <li>
-                <a href="attandance.php">Attendence</a>
+                <a href="attandance">Attendence</a>
             </li>
             <hr>
             <li>
-                <a href="timeline.php">Timeline</a>
+                <a href="timeline">Timeline</a>
             </li>
             <hr>
             <li>
-                <a href="fees.php">Academic Fees</a>
+                <a href="fees">Academic Fees</a>
             </li>
             <hr>
             <li>
-                <a href="notices.php">Academic Notices</a>
+                <a href="notices">Academic Notices</a>
             </li>
             <hr>
             <li>
-                <a href="courceout.php">Course Outline</a>
+                <a href="courceout">Course Outline</a>
             </li>
             <hr>
             <li>
-                <a href="timetable.php">Exam Timetable</a>
+                <a href="timetable">Exam Timetable</a>
+            </li>
+            <hr>
+            <li>
+                <a href="repository">repository</a>
             </li>
         </ul>
 

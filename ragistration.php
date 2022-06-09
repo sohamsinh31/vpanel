@@ -35,6 +35,9 @@ else {
     $english = $_POST['english'];
     $maths = $_POST['maths_theorey'];
     $percentage = $_POST['percentage'];
+    $degree = $_POST['degree'];
+    $branch = $_POST['branch'];
+    $year = $_POST['year'];
     $target_dir = "students/".$name2[0]."/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $q = "SELECT * FROM `studentinfo` where email = '$email' && password = '$password'";
@@ -45,7 +48,7 @@ else {
         header('location:login');
     }
     else{
-        $qy = "INSERT into `studentinfo`(studentname,dob,age,gender,address,pincode,mobile,email,password,photourl,fathername,proffesionf,mobilef,mothername,proffesionm,mobilem,physicst,physicsp,chemistryt,chemistryp,mathst,english,percentage) values ('$name','$date','$age','$gender','$address','$pincode','$mobile','$email','$password','$target_file','$fathername','$proffessionf','$mobilef','$mothername','$proffessionm','$mobilem','$physicst','$physicsp','$chemistryt','$chemistryp','$maths','$english','$percentage')";
+        $qy = "INSERT into `studentinfo`(studentname,dob,age,gender,address,pincode,mobile,email,password,photourl,fathername,proffesionf,mobilef,mothername,proffesionm,mobilem,physicst,physicsp,chemistryt,chemistryp,mathst,english,percentage,degree,branch,year) values ('$name','$date','$age','$gender','$address','$pincode','$mobile','$email','$password','$target_file','$fathername','$proffessionf','$mobilef','$mothername','$proffessionm','$mobilem','$physicst','$physicsp','$chemistryt','$chemistryp','$maths','$english','$percentage','$degree','$branch','$year')";
         mysqli_query($con,$qy);
         userimage();
         header('location:login.php');
