@@ -4,14 +4,14 @@
 function userimage() {
 	$add = $_POST['user'];
     $add2 = explode(" ",$add);
-	mkdir('student/'.$add.'');
-		$con = mysqli_connect('localhost','root');
-		mysqli_select_db($con,'vpanel');
-		$q = " SELECT * FROM `users` ";
-		$result = mysqli_query($con,$q);
-		$num = mysqli_num_rows($result);
-		while($row = mysqli_fetch_assoc($result)){
-			$target_dir = "users/".$add2."/";
+	mkdir('students/'.$add2[0].'');
+		// $con = mysqli_connect('localhost','root');
+		// mysqli_select_db($con,'vpanel');
+		// $q = " SELECT * FROM `users` ";
+		// $result = mysqli_query($con,$q);
+		// $num = mysqli_num_rows($result);
+		// while($row = mysqli_fetch_assoc($result)){
+			$target_dir = "students/".$add2[0]."/";
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 			$uploadOk = 1;
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -37,6 +37,6 @@ function userimage() {
 				echo "Sorry, there was an error uploading your file.";
 			  }
 			}
-		}
+		//}
 		}
 ?>

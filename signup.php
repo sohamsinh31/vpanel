@@ -6,6 +6,9 @@ if(!isset($_SESSION['username'])){
 else{
     header('location:index.php');
 }
+$name = "hi i am soham";
+$name2 = explode(" ",$name);
+echo $name2[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +48,8 @@ else{
                     <label>Mobile:</label><input type="tel" style="width:40%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="mobile">
 <br>
 <label>Email:</label><input type="email" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="email">
+                    <br>
+                    <label>Choose password:</label><input type="password" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="password">
                     <br><label>Students passport size photo:</label>
                     <input type="file" name="fileToUpload" id="fileToUpload">
                 <hr>

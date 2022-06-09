@@ -30,7 +30,7 @@ else{
             <h2>Log in form</h2>
             <form action="validation.php" method="post" enctype="multipart/form-data">
             <div class="form-groop">
-                    <label>username</label>
+                    <label>email</label>
                     <br>
                     <input style="width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" >
 <br>
