@@ -29,6 +29,13 @@ session_start();
      center:'title',
      right:'month,agendaWeek,agendaDay'
     },
+    views: {
+    timeGridFourDay: {
+      type: 'timeGrid',
+      duration: { days: 4 },
+      buttonText: '4 day'
+    }
+  },
     events: 'load.php',
     selectable:true,
     selectHelper:true,
@@ -37,7 +44,7 @@ session_start();
      var title = prompt("Enter Event Title");
      if(title)
      {
-      var start = $.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
+      var start =$.fullCalendar.formatDate(start, "Y-MM-DD HH:mm:ss");
       var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
       $.ajax({
        url:"insert.php",

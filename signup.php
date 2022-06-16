@@ -89,8 +89,8 @@
     </select>
     <label>Choose branch:</label>  
 <select name="branch">
-    <option value="CSE">Computer science and engineering</option>
-    <option value="ITE">Information technology and engineering</option>
+    <option value="CS">Computer science and engineering</option>
+    <option value="IE">Information technology and engineering</option>
     <option value="IT">Information technology</option>
     <option value="CH">Chemical engineering</option>
     <option value="CV">Civil engineering</option>
@@ -99,7 +99,18 @@
     <option value="PE">Pharmasutical engineering</option>
     </select>
     <label>Acadamic year:20</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="year" class="form-control">
-
+    <br>
+    <label>Choose sem:</label>
+    <select id="sem" name="semester">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    </select>
         </div>
             <br>
                 <span><a style="color:gold;" href="login.php">Already sign up in click to logged in</a></span>

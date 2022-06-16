@@ -64,7 +64,6 @@
 
         body {
             font-family: var(--ff-secondary);
-            color: var(--clr-grey-1);
             line-height: 1.5;
             font-size: 0.875rem;
         }
@@ -267,6 +266,7 @@ Sidebar
         .sidebar {
             position: fixed;
             top: 0;
+            z-index: 1;
             left: 0;
             width: 100%;
             height: 100%;
