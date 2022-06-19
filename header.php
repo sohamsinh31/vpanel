@@ -351,14 +351,15 @@ Sidebar
         <h6 style="text-align: center;">student name</h6>
 
         <ul class="links">
+        <li>
+                <a href="index">Home</a>
+            </li>
+            <hr>
             <li>
                 <a href="attandance">Attendence</a>
             </li>
             <hr>
-            <li>
-                <a href="timeline">Timeline</a>
-            </li>
-            <hr>
+
             <li>
                 <a href="fees">Academic Fees</a>
             </li>
