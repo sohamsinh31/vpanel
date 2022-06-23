@@ -81,4 +81,4 @@
                 alert("Event is undefined");
             }
         })
-    })
+    });

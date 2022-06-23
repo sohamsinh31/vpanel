@@ -1,4 +1,13 @@
-<?php require_once('db-connect.php') ?>
+
+<?php require_once('db-connect.php');
+session_start(); 
+if(!$_SESSION['id2']){
+    header('location:../admin/login');
+}
+// else{
+//     header('location:index');
+// }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,11 +105,11 @@
                             <form action="save_schedule.php" method="post" id="schedule-form">
                                 <input type="hidden" name="id" value="">
                                 <div class="form-group mb-2">
-                                    <label for="title" class="control-label">Title</label>
+                                    <label for="title" class="control-label">Subject</label>
                                     <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <label for="description" class="control-label">Description</label>
+                                    <label for="description" class="control-label">Enrollment</label>
                                     <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
                                 </div>
                                 <div class="form-group mb-2">
@@ -135,9 +144,9 @@
                 <div class="modal-body rounded-0">
                     <div class="container-fluid">
                         <dl>
-                            <dt class="text-muted">Title</dt>
+                            <dt class="text-muted">Subject</dt>
                             <dd id="title" class="fw-bold fs-4"></dd>
-                            <dt class="text-muted">Description</dt>
+                            <dt class="text-muted">Enrollment</dt>
                             <dd id="description" class=""></dd>
                             <dt class="text-muted">Start</dt>
                             <dd id="start" class=""></dd>
@@ -177,6 +186,11 @@ if(isset($conn)) $conn->close();
 <script src="./js/script.js"></script>
 <script src="./js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
+    // $("#attandance").on("click",function(e){
+    //     console.log("hi");
+    //     document.getElementById("description").value = e.target.value;
+    // })
+
     $("#load1").on('click',function(e){
         e.preventDefault();
         let branch = $("#branch").val();
@@ -193,25 +207,21 @@ if(isset($conn)) $conn->close();
         }
     })
 })
-const loginform = document.getElementById('form1');
-const form11=document.getElementById('form11');
-form11.addEventListener("click",handlesubmit);
-function handlesubmit(e){
-    e.preventDefault();
-    const formdata = new FormData(e.target);
-    console.log(formdata);
+
+function handlechange(name){
+        console.log(name);
+    document.getElementById("description").value += name+",";
 }
-
-$(document).ready(function(){
-$(document).on('click','#form11',function(){
-    // e.preventDefault();
-
-let form = document.getElementById('form1');
-let element = document.getElementById('attandance').value;
-// let element2 = form.element.value;
-console.log(element);
-})
-})
-
+// var ele = document.getElementById('attandance');
+// var i = ele.length;
+// console.log(i);
+// for (var j = 0; j < i; j++) {
+//     if (ele[j].checked) { //index has to be j.
+//         alert('radio '+j+' checked');
+//     }
+//     else {
+//         alert('radio '+j+' unchecked');
+//     }
+// }
 </script>
 </html>

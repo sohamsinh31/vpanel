@@ -9,7 +9,8 @@ $num = $result->num_rows;
 $output = '<form id="form1" type="POST" name="form1">';
 if($num>0){
 while($row = $result->fetch_assoc()){
-    $output .= '<p>'.$row['enrollment'].'<p><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" id="attandance" name="'.$row['id'].'" value="'.$row['enrollment'].'"><label>Present</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" id="attandance" type="radio" name="'.$row['id'].'" value="'.$row['enrollment'].'"><label>Absent</label>
+    $enrolllment = "'".$row['enrollment']."'";
+    $output .= '<p>'.$row['enrollment'].'<p><input onclick="handlechange('.$enrolllment.')" style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" id="attandance" name="'.$row['id'].'"value="'.$row['enrollment'].'"><label>Present</label><input onchange="handlechange()" style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" id="attandance"  type="radio" name="'.$row['id'].'" value="Absent"><label>Absent</label>
     ';
 }
 $output .= '
