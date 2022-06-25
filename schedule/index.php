@@ -4,6 +4,11 @@ session_start();
 if(!$_SESSION['id2']){
     header('location:../admin/login');
 }
+$host     = 'localhost';
+$username = 'root';
+$password = '';
+$dbname   ='vpanel';
+
 // else{
 //     header('location:index');
 // }
@@ -113,6 +118,22 @@ if(!$_SESSION['id2']){
                                     <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
                                 </div>
                                 <div class="form-group mb-2">
+                                    <label for="absent" class="control-label">Absent</label>
+                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="absent" id="absent" required></textarea>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="title" class="control-label">Branch</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="branch2" id="branch2" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="title" class="control-label">Degree</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="degree2" id="degree2" required>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label for="title" class="control-label">semester</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="semester2" id="semester2" required>
+                                </div>
+                                <div class="form-group mb-2">
                                     <label for="start_datetime" class="control-label">Start</label>
                                     <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
                                 </div>
@@ -147,7 +168,9 @@ if(!$_SESSION['id2']){
                             <dt class="text-muted">Subject</dt>
                             <dd id="title" class="fw-bold fs-4"></dd>
                             <dt class="text-muted">Enrollment</dt>
-                            <dd id="description" class=""></dd>
+                            <dd id="description" class="fw-bold fs-4"></dd>
+                            <dt class="text-muted">Absent</dt>
+                            <dd id="absent" class=""></dd>
                             <dt class="text-muted">Start</dt>
                             <dd id="start" class=""></dd>
                             <dt class="text-muted">End</dt>
@@ -197,6 +220,9 @@ if(isset($conn)) $conn->close();
         let sem = $("#sem").val();
         let degree = $("#degree").val();
         console.log(branch+sem+degree);
+        document.getElementById('branch2').value = branch;
+        document.getElementById('degree2').value = degree;
+        document.getElementById('semester2').value = sem;
     $.ajax({
         url:"loadbranch.php",
         type:"POST",
@@ -212,16 +238,9 @@ function handlechange(name){
         console.log(name);
     document.getElementById("description").value += name+",";
 }
-// var ele = document.getElementById('attandance');
-// var i = ele.length;
-// console.log(i);
-// for (var j = 0; j < i; j++) {
-//     if (ele[j].checked) { //index has to be j.
-//         alert('radio '+j+' checked');
-//     }
-//     else {
-//         alert('radio '+j+' unchecked');
-//     }
-// }
+function Absent(name){
+        console.log(name);
+    document.getElementById("absent").value += name+",";
+}
 </script>
 </html>
