@@ -356,7 +356,7 @@ Sidebar
             </li>
             <hr>
             <li>
-                <a href="attandance">Attendence</a>
+                <a href="attandance/index">Attendence</a>
             </li>
             <hr>
 
