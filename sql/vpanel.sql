@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2022 at 06:05 AM
+-- Generation Time: Jun 26, 2022 at 12:51 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -67,6 +67,34 @@ CREATE TABLE `classes` (
 INSERT INTO `classes` (`id`, `subject`, `teachername`, `teacherid`, `degree`, `branch`, `sem`) VALUES
 (6, 'SESH1080', 'vikas s. chomal', 4, 'BE/BTECH', 'CS', 1),
 (7, 'SECV1050', 'vikas s. chomal', 4, 'BE/BTECH', 'CS', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schedule_list`
+--
+
+CREATE TABLE `schedule_list` (
+  `id` int(30) NOT NULL,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `absent` varchar(255) NOT NULL,
+  `degree` varchar(255) NOT NULL,
+  `branch` varchar(255) NOT NULL,
+  `semester` varchar(255) NOT NULL,
+  `start_datetime` datetime NOT NULL,
+  `end_datetime` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `schedule_list`
+--
+
+INSERT INTO `schedule_list` (`id`, `title`, `description`, `absent`, `degree`, `branch`, `semester`, `start_datetime`, `end_datetime`) VALUES
+(8, 'SESH1080', '21SE02CS001,21SE02CS003,', '21SE02CS002,', 'BE/BTECH', 'CS', '1', '2022-06-24 20:56:00', '2022-06-24 21:56:00'),
+(12, 'SESH1080', '21SE02CS001,21SE02CS002,21SE02CS003,', 'none', 'BE/BTECH', 'CS', '1', '2022-06-26 11:38:00', '2022-06-26 00:39:00'),
+(14, 'SESH1070', '21SE02CS001,21SE02CS002,21SE02CS003,', '', 'BE/BTECH', 'CS', '1', '2022-06-26 11:50:00', '2022-06-26 00:50:00'),
+(15, 'SESH1070', '21SE02CS001,21SE02CS002,21SE02CS003,', '', 'BE/BTECH', 'CS', '1', '2022-06-26 11:50:00', '2022-06-26 00:50:00');
 
 -- --------------------------------------------------------
 
@@ -154,6 +182,12 @@ ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `schedule_list`
+--
+ALTER TABLE `schedule_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `studentinfo`
 --
 ALTER TABLE `studentinfo`
@@ -180,6 +214,12 @@ ALTER TABLE `attachements`
 --
 ALTER TABLE `classes`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `schedule_list`
+--
+ALTER TABLE `schedule_list`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `studentinfo`

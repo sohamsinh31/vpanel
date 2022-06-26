@@ -115,11 +115,11 @@ $dbname   ='vpanel';
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="description" class="control-label">Enrollment</label>
-                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
+                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" ></textarea>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="absent" class="control-label">Absent</label>
-                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="absent" id="absent" required></textarea>
+                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="absent" id="absent" ></textarea>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="title" class="control-label">Branch</label>

@@ -4,7 +4,29 @@ session_start();
 if(!$_SESSION['id']){
     header('location:../login');
 }
-
+$sid = $_SESSION['id'];
+$con = mysqli_connect("localhost","root","","vpanel");
+$qq="SELECT * FROM `studentinfo` WHERE id='{$sid}'";
+$rrr=mysqli_query($con,$qq);
+$branchh='';
+$degreee='';
+$semesterr='';
+$q = " SELECT * FROM `schedule_list` WHERE description LIKE '%21SE02CS002%'";
+$q3 = " SELECT DISTINCT title FROM `schedule_list` WHERE description LIKE '%21SE02CS002%'";
+$q2 = " SELECT * FROM `schedule_list` WHERE absent LIKE '%21SE02CS002%'";
+$result = mysqli_query($con,$q);
+$result2 = mysqli_query($con,$q2);
+$num = mysqli_num_rows($result);
+$num2 = mysqli_num_rows($result2);
+$sum = ($num+$num2);
+$avg = ($num+$num2)-$num2;
+$percentage = (100*$avg)/$sum."%";
+$result3 = mysqli_query($con,$q3);
+while($roww=mysqli_fetch_assoc($rrr)){
+    $branchh.=$roww['branch'];
+    $degreee.=$roww['degree'];
+    $semesterr.=$roww['semester'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +43,14 @@ if(!$_SESSION['id']){
     <script src="./js/bootstrap.min.js"></script>
     <script src="./fullcalendar/lib/main.min.js"></script>
     <style>
+        .attandance{
+            border:2px solid black;
+            border-radius:12px;
+            height:40px;
+        }
+        p{
+
+        }
         :root {
             --bs-success-rgb: 71, 222, 152 !important;
         }
@@ -47,16 +77,32 @@ if(!$_SESSION['id']){
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="topNavBar">
         <div class="container">
-            <a class="navbar-brand" href="https://sourcecodester.com">
-            Sourcecodester
+            <a class="navbar-brand" href="../index">
+            VPANEL
             </a>
 
             <div>
-                <b class="text-light">Sample Scheduling</b>
+                <b class="text-light">Attandance</b>
             </div>
         </div>
     </nav>
     <!-- Event Details Modal -->
+    <?php
+    while($row=mysqli_fetch_assoc($result3)){
+        $subject = $row['title'];
+        $query="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}' AND description LIKE '%21SE02CS002%'";
+        $query2="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}'AND absent LIKE '%21SE02CS002%'";
+        $resultt = mysqli_query($con,$query);
+        $resultt2 = mysqli_query($con,$query2);
+        $numm = mysqli_num_rows($resultt);
+        $numm2 = mysqli_num_rows($resultt2);
+        $summ2 = ($numm+$numm2);
+        $avgg2 = ($numm+$numm2)-$numm2;
+        $percentage2 = (100*$avgg2)/$summ2."%";
+        echo '<div class="attandance"><p style="float:left;position:absolute;">'.$row['title'].'</p><p style="float:right;right:4%;position:absolute;">'.$percentage2.'</div>';
+}
+echo '<div class="attandance"><p style="float:left;position:absolute;">Total</p><p style="float:right;right:4%;position:absolute;">'.$percentage.'</div>';
+    ?>
     <div class="container py-5" id="page-container">
         <div class="row">
             <div class="col-md-9">

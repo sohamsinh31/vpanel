@@ -14,6 +14,7 @@ $(function() {
         y = date.getFullYear()
 
     calendar = new Calendar(document.getElementById('calendar'), {
+        initialView: 'timeGridWeek',
         headerToolbar: {
             left: 'prev,next today',
             right: 'dayGridMonth,dayGridWeek,list',
@@ -28,8 +29,8 @@ $(function() {
             var id = info.event.id
             if (!!scheds[id]) {
                 _details.find('#title').text(scheds[id].title)
-                // _details.find('#description').text(scheds[id].description)
-                // _details.find('#absent').text(scheds[id].absent)
+                _details.find('#description').text(scheds[id].description)
+                _details.find('#absent').text(scheds[id].absent)
                 _details.find('#start').text(scheds[id].sdate)
                 _details.find('#end').text(scheds[id].edate)
                 _details.find('#edit,#delete').attr('data-id', id)
@@ -86,4 +87,5 @@ $(function() {
         //     alert("Event is undefined");
         // }
     })
+
 });
