@@ -11,9 +11,10 @@ $rrr=mysqli_query($con,$qq);
 $branchh='';
 $degreee='';
 $semesterr='';
-$q = " SELECT * FROM `schedule_list` WHERE description LIKE '%21SE02CS002%'";
-$q3 = " SELECT DISTINCT title FROM `schedule_list` WHERE description LIKE '%21SE02CS002%'";
-$q2 = " SELECT * FROM `schedule_list` WHERE absent LIKE '%21SE02CS002%'";
+$enrollmentt='';
+$q = " SELECT * FROM `schedule_list` WHERE description LIKE '%{$enrollmentt},%'";
+$q3 = " SELECT DISTINCT title FROM `schedule_list` WHERE description LIKE '%{$enrollmentt}%'";
+$q2 = " SELECT * FROM `schedule_list` WHERE absent LIKE '%,{$enrollmentt},%'";
 $result = mysqli_query($con,$q);
 $result2 = mysqli_query($con,$q2);
 $num = mysqli_num_rows($result);
@@ -26,6 +27,7 @@ while($roww=mysqli_fetch_assoc($rrr)){
     $branchh.=$roww['branch'];
     $degreee.=$roww['degree'];
     $semesterr.=$roww['semester'];
+    $enrollmentt=$roww['enrollment'];
 }
 ?>
 <!DOCTYPE html>
@@ -90,8 +92,8 @@ while($roww=mysqli_fetch_assoc($rrr)){
     <?php
     while($row=mysqli_fetch_assoc($result3)){
         $subject = $row['title'];
-        $query="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}' AND description LIKE '%21SE02CS002%'";
-        $query2="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}'AND absent LIKE '%21SE02CS002%'";
+        $query="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}' AND description LIKE '%{$enrollmentt}%'";
+        $query2="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}'AND absent LIKE '%{$enrollmentt}%'";
         $resultt = mysqli_query($con,$query);
         $resultt2 = mysqli_query($con,$query2);
         $numm = mysqli_num_rows($resultt);
