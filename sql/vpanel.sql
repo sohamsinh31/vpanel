@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 12:51 PM
+-- Generation Time: Aug 07, 2022 at 05:24 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -71,6 +71,27 @@ INSERT INTO `classes` (`id`, `subject`, `teachername`, `teacherid`, `degree`, `b
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `examtable`
+--
+
+CREATE TABLE `examtable` (
+  `id` int(255) NOT NULL,
+  `pdfurl` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `sem` int(255) NOT NULL,
+  `degree` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `examtable`
+--
+
+INSERT INTO `examtable` (`id`, `pdfurl`, `date`, `sem`, `degree`) VALUES
+(1, 'attachements/exam/177.pdf', '2022-07-25', 1, 'BE/BTECH');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `schedule_list`
 --
 
@@ -91,10 +112,11 @@ CREATE TABLE `schedule_list` (
 --
 
 INSERT INTO `schedule_list` (`id`, `title`, `description`, `absent`, `degree`, `branch`, `semester`, `start_datetime`, `end_datetime`) VALUES
-(8, 'SESH1080', '21SE02CS001,21SE02CS003,', '21SE02CS002,', 'BE/BTECH', 'CS', '1', '2022-06-24 20:56:00', '2022-06-24 21:56:00'),
-(12, 'SESH1080', '21SE02CS001,21SE02CS002,21SE02CS003,', 'none', 'BE/BTECH', 'CS', '1', '2022-06-26 11:38:00', '2022-06-26 00:39:00'),
+(8, 'SESH1080', ',21SE02CS001,21SE02CS003,', ',21SE02CS002,', 'BE/BTECH', 'CS', '1', '2022-06-24 20:56:00', '2022-06-24 21:56:00'),
+(12, 'SESH1080', ',21SE02CS001,21SE02CS002,21SE02CS003,', 'none', 'BE/BTECH', 'CS', '1', '2022-06-26 11:38:00', '2022-06-26 00:39:00'),
 (14, 'SESH1070', '21SE02CS001,21SE02CS002,21SE02CS003,', '', 'BE/BTECH', 'CS', '1', '2022-06-26 11:50:00', '2022-06-26 00:50:00'),
-(15, 'SESH1070', '21SE02CS001,21SE02CS002,21SE02CS003,', '', 'BE/BTECH', 'CS', '1', '2022-06-26 11:50:00', '2022-06-26 00:50:00');
+(15, 'SESH1070', '21SE02CS001,21SE02CS002,21SE02CS003,', '', 'BE/BTECH', 'CS', '1', '2022-06-26 11:50:00', '2022-06-26 00:50:00'),
+(16, 'SESH1080', '21SE02CS002,21SE02CS003,', '21SE02CS001,', 'BE/BTECH', 'CS', '1', '2022-06-27 22:06:00', '2022-06-26 23:07:00');
 
 -- --------------------------------------------------------
 
@@ -140,7 +162,7 @@ CREATE TABLE `studentinfo` (
 
 INSERT INTO `studentinfo` (`id`, `studentname`, `dob`, `age`, `gender`, `address`, `pincode`, `mobile`, `email`, `password`, `photourl`, `fathername`, `proffesionf`, `mobilef`, `mothername`, `proffesionm`, `mobilem`, `physicst`, `physicsp`, `chemistryt`, `chemistryp`, `mathst`, `english`, `percentage`, `degree`, `branch`, `year`, `semester`, `enrollment`) VALUES
 (4, 'Boraisa sohamsinh jitendrasinh', '2003-12-01', 18, 'A/206 shriji villa recidency ', 'A/206 shriji villa recidency ', 33002, 2147483647, 'sohamb2019@gmail.com', '1234567', 'students/Boraisa/WhatsApp Image 2022-02-08 at 7.38.04 PM.jpeg', 'Boraisa jitendrasinh narpatsinh', 'job', 2147483647, 'Borasia hemlataben jitendrasinh', 'teacher', 2147483647, 77, 77, 77, 77, 77, 77, 77, 'BE/BTECH', 'CS', 21, 1, '21SE02CS001'),
-(5, 'Brahmbhatt yuvraj shyamsinh', '2022-06-01', 18, 'kuchh bhi likh do', 'kuchh bhi likh do', 393002, 2147483647, 'sohamb2020@gmail.com', '1234567', 'students/Brahmbhatt/Vehical-Color-Change-Film.jpg', 'asdxxs', 'buissness', 2147483647, 'sdcdcsc', 'buissness', 2147483647, 77, 77, 77, 77, 77, 7, 77, 'BE/BTECH', 'CS', 21, 1, '21SE02CS003'),
+(5, 'Brahmbhatt yuvraj shyamsinh', '2022-07-26', 18, 'kuchh bhi likh do', 'kuchh bhi likh do', 393002, 2147483647, 'sohamb2020@gmail.com', '1234567', 'students/Brahmbhatt/Vehical-Color-Change-Film.jpg', 'asdxxs', 'buissness', 2147483647, 'sdcdcsc', 'buissness', 2147483647, 77, 77, 77, 77, 77, 7, 77, 'BE/BTECH', 'CS', 21, 1, '21SE02CS003'),
 (10, 'Boraisa trrr rf', '2022-06-16', 12, 'male', 'edeffrfrf', 393002, 2147483647, 'sohamb2024@gmail.com', '1234567', 'students/Boraisa/Vehical-Color-Change-Film.jpg', 'dcdfff', 'buissness', 2147483647, 'cdsdfg', 'buissness', 2147483647, 11, 11, 11, 11, 11, 11, 11, 'BE/BTECH', 'CS', 21, 1, '21SE02CS002');
 
 -- --------------------------------------------------------
@@ -182,6 +204,12 @@ ALTER TABLE `classes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `examtable`
+--
+ALTER TABLE `examtable`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `schedule_list`
 --
 ALTER TABLE `schedule_list`
@@ -216,10 +244,16 @@ ALTER TABLE `classes`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `examtable`
+--
+ALTER TABLE `examtable`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `schedule_list`
 --
 ALTER TABLE `schedule_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `studentinfo`
