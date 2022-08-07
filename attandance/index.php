@@ -12,16 +12,7 @@ $branchh='';
 $degreee='';
 $semesterr='';
 $enrollmentt='';
-$q = " SELECT * FROM `schedule_list` WHERE description LIKE '%{$enrollmentt},%'";
 $q3 = " SELECT DISTINCT title FROM `schedule_list` WHERE description LIKE '%{$enrollmentt}%'";
-$q2 = " SELECT * FROM `schedule_list` WHERE absent LIKE '%,{$enrollmentt},%'";
-$result = mysqli_query($con,$q);
-$result2 = mysqli_query($con,$q2);
-$num = mysqli_num_rows($result);
-$num2 = mysqli_num_rows($result2);
-$sum = ($num+$num2);
-$avg = ($num+$num2)-$num2;
-$percentage = (100*$avg)/$sum."%";
 $result3 = mysqli_query($con,$q3);
 while($roww=mysqli_fetch_assoc($rrr)){
     $branchh.=$roww['branch'];
@@ -29,6 +20,16 @@ while($roww=mysqli_fetch_assoc($rrr)){
     $semesterr.=$roww['semester'];
     $enrollmentt=$roww['enrollment'];
 }
+$q = " SELECT * FROM `schedule_list` WHERE description LIKE '%{$enrollmentt}%'";
+$q2 = " SELECT * FROM `schedule_list` WHERE absent LIKE '%{$enrollmentt},%'";
+$result = mysqli_query($con,$q);
+$result2 = mysqli_query($con,$q2);
+$num = mysqli_num_rows($result);
+$num2 = mysqli_num_rows($result2);
+$sum = ($num+$num2);
+$avg = ($num+$num2)-$num2;
+$percentage = (100*$avg)/$sum."%";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

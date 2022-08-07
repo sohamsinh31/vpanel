@@ -69,11 +69,6 @@ if(!isset($_SESSION['id'])){
     <tr>
       <td id="header">
         <h1>Classes</h1>
-        <!-- <button class="button1">
-    <div id="createclass">
-        +
-    </div>
-    </button> -->
       </td>
     </tr>
     <tr>
@@ -85,6 +80,7 @@ if(!isset($_SESSION['id'])){
     </tr>
   </table>
   </button>
+  <div id="birthday"></div>
 </body>
 <script src="admin/js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -100,6 +96,16 @@ if(!isset($_SESSION['id'])){
       });
     }
     loadTable();
+    function birthday(){
+      $.ajax({
+        url : "birthday.php",
+        type : "POST",
+        success : function(data){
+          $("#birthday").html(data);
+        }
+      });
+    }
+    birthday();
      // Load Table Records on Page Load
 });
 </script>

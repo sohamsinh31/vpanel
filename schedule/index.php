@@ -219,7 +219,6 @@ if(isset($conn)) $conn->close();
         let branch = $("#branch").val();
         let sem = $("#sem").val();
         let degree = $("#degree").val();
-        console.log(branch+sem+degree);
         document.getElementById('branch2').value = branch;
         document.getElementById('degree2').value = degree;
         document.getElementById('semester2').value = sem;
@@ -228,19 +227,41 @@ if(isset($conn)) $conn->close();
         type:"POST",
         data:{branch:branch,sem:sem,degree:degree},
         success:function(data){
-            console.log(data);
             $("#loadbranch").html(data);
         }
     })
 })
+function deleteAbsent(name){
+    let elemm = document.getElementById("absent").value;
+    let index =elemm.indexOf(name);
+    if(index>=0){
+        // let elem = document.getElementById("absent").value -= name+",";
+    // let index =elem.indexOf(name);
+    // if(index>=0){
+    //     let str = elem;
+        let len = elemm.length;
+        //elem.slice(0,index) + elem.slice(index+1);
+        console.log(elemm.slice(0,index) + elemm.slice(index+len));
+    //}
+    }
+}
+function deletePresent(name){
 
+}
 function handlechange(name){
-        console.log(name);
-    document.getElementById("description").value += name+",";
+    let elemm = document.getElementById("description").value;
+    let index =elemm.indexOf(name);
+    console.log(index);
+    // if(index>=0){
+    //     alert("The value already exists");
+    // }
+    // else{
+        let elem = document.getElementById("description").value += name+",";
+        // deleteAbsent(name);
+    //}
 }
 function Absent(name){
-        console.log(name);
-    document.getElementById("absent").value += name+",";
+    let elem2 = document.getElementById("absent").value += name+",";
 }
 </script>
 </html>

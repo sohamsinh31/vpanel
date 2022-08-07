@@ -14,9 +14,7 @@ while($row = $result->fetch_assoc()){
     ';
 }
 $output .= '
-<input type="submit">
-</form>
-<button id="form11">Submit</button>';
+</form>';
 echo $output;
 }
 ?>
