@@ -171,4 +171,9 @@ if(!isset($_SESSION['id2'])){
     });
 });
 </script>
+<script>
+function handleclick(name){
+  console.log(name);
+}
+</script>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$tid = $_SESSION['id2'];
+//$tid = $_SESSION['id2'];
 include("../function.php");
 
 $sql = "SELECT * FROM examtable";
@@ -14,7 +14,7 @@ if(mysqli_num_rows($result) > 0 ){
          while($row = mysqli_fetch_assoc($result)){
                 $rrr = $row['pdfurl'];
                 $output .= '<td>
-                <a style="color:inherit;" onclick="handleclick("'.$rrr.'")">
+                <a href="'.$row['pdfurl'].'" style="color:inherit;">
                 <button>
                 <div id="classes">
             '.$row['date'].'
