@@ -172,7 +172,6 @@ if(!isset($_SESSION['id2'])){
             console.log(data);
         }
        })
-    //    {classid:<php echo $class; ?>,name2:name,type:type,file:form_data}
     })
     });
 });

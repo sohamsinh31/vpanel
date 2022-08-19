@@ -17,6 +17,7 @@ else {
     $password = $_POST['password'];
     $degree = $_POST['degree'];
     $branch = $_POST['branch'];
+    $prof = $_POST['prof'];
     $q = "SELECT * FROM `teacher` where teachername = '$name'";
     $result = mysqli_query($con,$q);
     $num = mysqli_num_rows($result);
@@ -25,7 +26,7 @@ else {
         header('location:login');
     }
     else{
-        $qy = "INSERT into `teacher` (`teachername`,`degree`,`branch`,`email`,`password`) values ('$name','$degree','$branch','$email','$password')";
+        $qy = "INSERT into `teacher` (`teachername`,`degree`,`branch`,`email`,`password`,`proffesion`) values ('$name','$degree','$branch','$email','$password','$prof')";
         mysqli_query($con,$qy) or die('Error: '. mysqli_error($con) );
         echo "success";
         header('location:login');

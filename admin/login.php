@@ -1,11 +1,12 @@
 <?php
 session_start();
-if(!isset($_SESSION['id2'])){
- echo "not logged in";
-}
-else{
-    header('location:index');
-}
+$next = $_GET['next'];
+// if(!isset($_SESSION['id2'])){
+//  echo "not logged in";
+// }
+// else{
+//     header('location:index');
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,12 +29,13 @@ else{
     <div class="upload">
         <div class="col-lg-6">
             <h2>Log in form</h2>
-            <form action="validation.php" method="post" enctype="multipart/form-data">
+            <form action="validation" method="post" enctype="multipart/form-data">
             <div class="form-groop">
                     <label>email</label>
                     <br>
-                    <input style="width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" >
+                    <input style="width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="email" >
 <br>
+<input type="hidden" name="next" value=<?php echo $next ?>>
                 </div>
 
 <div class="form-groop">

@@ -2,7 +2,9 @@
 session_start([
   'cookie_lifetime' => 86400,
 ]);
-header('location:login.php');
+$next = $_POST['next'];
+echo $next;
+// header('location:login.php');
 $con = mysqli_connect('localhost','root');
 if($con){
     echo "connection was successfull";
@@ -10,7 +12,7 @@ if($con){
 else{
     echo "no connection";
 }
-$required = array('user' , 'password');
+$required = array('email' , 'password');
 
 // Loop over field names, make sure each one exists and is not empty
 $error = false;
@@ -27,7 +29,7 @@ mysqli_select_db($con,'vpanel');
 $name = $_POST['user'];
 $pass = $_POST['password'];
 $email = $_POST['email'];
-$q = " SELECT * FROM `teacher` WHERE email = '$name' AND password = '$pass'";
+$q = " SELECT * FROM `teacher` WHERE email = '$email' AND password = '$pass'";
 $result = mysqli_query($con,$q);
 $num = mysqli_num_rows($result);
 if($num == 1){
@@ -35,7 +37,7 @@ if($num == 1){
     
     while($row = mysqli_fetch_assoc($result)){
       $_SESSION['id2'] = $row['id'];
-      header('location:class');
+      header('location:'.$next.'');
     }
 }
 else{
