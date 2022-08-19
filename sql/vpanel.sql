@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 07, 2022 at 05:24 PM
+-- Generation Time: Aug 19, 2022 at 02:31 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -176,6 +176,7 @@ CREATE TABLE `teacher` (
   `teachername` varchar(255) NOT NULL,
   `degree` varchar(255) NOT NULL,
   `branch` varchar(255) NOT NULL,
+  `profession` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -184,8 +185,34 @@ CREATE TABLE `teacher` (
 -- Dumping data for table `teacher`
 --
 
-INSERT INTO `teacher` (`id`, `teachername`, `degree`, `branch`, `email`, `password`) VALUES
-(4, 'vikas s. chomal', 'BE/BTECH', 'CSE', 'vikas@gmail.com', '1234567');
+INSERT INTO `teacher` (`id`, `teachername`, `degree`, `branch`, `profession`, `email`, `password`) VALUES
+(4, 'vikas s. chomal', 'BE/BTECH', 'CSE', 'Computer', 'vikas@gmail.com', '1234567');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `timetable`
+--
+
+CREATE TABLE `timetable` (
+  `id` bigint(255) NOT NULL,
+  `teacherid` bigint(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `branch` varchar(255) NOT NULL,
+  `sem` int(255) NOT NULL,
+  `degree` varchar(255) NOT NULL,
+  `class` varchar(255) NOT NULL,
+  `starttime` time NOT NULL,
+  `endtime` time NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `timetable`
+--
+
+INSERT INTO `timetable` (`id`, `teacherid`, `subject`, `branch`, `sem`, `degree`, `class`, `starttime`, `endtime`) VALUES
+(1, 4, 'maths', 'CSE', 1, 'BE/BTECH', 'c-107', '03:32:55', '04:32:55'),
+(2, 4, 'physics', 'CSE', 1, 'BE/BTECH', 'c-101', '04:32:55', '05:32:55');
 
 --
 -- Indexes for dumped tables
@@ -228,6 +255,12 @@ ALTER TABLE `teacher`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `timetable`
+--
+ALTER TABLE `timetable`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -266,6 +299,12 @@ ALTER TABLE `studentinfo`
 --
 ALTER TABLE `teacher`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `timetable`
+--
+ALTER TABLE `timetable`
+  MODIFY `id` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
