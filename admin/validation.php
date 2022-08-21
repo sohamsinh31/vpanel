@@ -26,18 +26,21 @@ if ($error) {
   echo "All fields are required.";
 } else {
 mysqli_select_db($con,'vpanel');
-$name = $_POST['user'];
+#$name = $_POST['user'];
 $pass = $_POST['password'];
 $email = $_POST['email'];
 $q = " SELECT * FROM `teacher` WHERE email = '$email' AND password = '$pass'";
 $result = mysqli_query($con,$q);
 $num = mysqli_num_rows($result);
 if($num == 1){
-    $_SESSION['username2'] = $name;
+    #$_SESSION['username2'] = $name;
     
     while($row = mysqli_fetch_assoc($result)){
       $_SESSION['id2'] = $row['id'];
-      header('location:'.$next.'');
+      if($next){
+        header('location:'.$next.'');
+      }
+      header('location:index');
     }
 }
 else{

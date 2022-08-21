@@ -5,14 +5,14 @@
         if (!!scheds) {
             Object.keys(scheds).map(k => {
                 var row = scheds[k]
-                events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime });
+                events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
             })
         }
         var date = new Date()
         var d = date.getDate(),
             m = date.getMonth(),
             y = date.getFullYear()
-
+console.log(events[0])
         calendar = new Calendar(document.getElementById('calendar'), {
             headerToolbar: {
                 left: 'prev,next today',
@@ -20,9 +20,10 @@
                 center: 'title',
             },
             selectable: true,
-            themeSystem: 'bootstrap',
-            //Random default events
-            events: events,
+            // events: {
+            //     url:'testing/file.php'
+            // },
+            events:events,
             eventClick: function(info) {
                 var _details = $('#event-details-modal')
                 var id = info.event.id
@@ -57,14 +58,14 @@
             var id = $(this).attr('data-id')
             if (!!scheds[id]) {
                 var _form = $('#schedule-form')
-                console.log(String(scheds[id].start_datetime), String(scheds[id].start_datetime).replace(" ", "\\t"))
+                console.log(String(scheds[id].start_datetime), String(scheds[id].start_datetime).replace(" ", "\\t"),scheds[id].absent)
                 _form.find('[name="id"]').val(id)
                 _form.find('[name="title"]').val(scheds[id].title)
-                _form.find('[name="degree2"]').val(scheds[id].degree2)
-                _form.find('[name="branch2"]').val(scheds[id].branch2)
-                _form.find('[name="semester2"]').val(scheds[id].semester2)
+                _form.find('[name="degree2"]').val(scheds[id].degree)
+                _form.find('[name="branch2"]').val(scheds[id].branch)
+                _form.find('[name="semester2"]').val(scheds[id].semester)
                 _form.find('[name="description"]').val(scheds[id].description)
-                _form.find('[name="absent"]').val(scheds[id].title)
+                _form.find('[name="absent"]').val(scheds[id].absent)
                 _form.find('[name="start_datetime"]').val(String(scheds[id].start_datetime).replace(" ", "T"))
                 _form.find('[name="end_datetime"]').val(String(scheds[id].end_datetime).replace(" ", "T"))
                 $('#event-details-modal').modal('hide')

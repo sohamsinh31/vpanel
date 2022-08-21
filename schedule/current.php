@@ -18,10 +18,25 @@ while($row = $result->fetch_assoc()){
         $degree = $row['degree'];
         $sem = $row['sem'];
         $ttid = $row['id'];
+        $datetime =  date('y-m-d',time());
+        $startt = $datetime." ".$start;
+        $endd = $datetime." ".$end;
+        $arr = array(
+            "startt"=>$startt,
+            "endd"=>$end
+        );
+        // echo $startt."<br>";
+        // echo $endd;
+        $row+= $arr;
         $json[] = $row;
-        echo $row['subject'];
     }
+    // else{
+    //     echo "No data aviable";
+    // }
 }
-echo json_encode($json);
+ echo json_encode($json);
+}
+else {
+    echo json_encode($json);
 }
 ?>

@@ -2,7 +2,7 @@
 <?php require_once('db-connect.php');
 session_start(); 
 if(!$_SESSION['id2']){
-    header('location:../admin/login');
+    header('location:../admin/login?next=schedule/index');
 }
 $host     = 'localhost';
 $username = 'root';
@@ -48,6 +48,13 @@ $dbname   ='vpanel';
             border-style: solid;
             border-width: 1px !important;
         }
+        #custom{
+            display:none;
+        }
+        .one{
+            left:25%;
+            position:absolute;
+        }
     </style>
 </head>
 
@@ -55,14 +62,24 @@ $dbname   ='vpanel';
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient" id="topNavBar">
         <div class="container">
             <a class="navbar-brand" href="https://sourcecodester.com">
-            Sourcecodester
+            VPANEL
             </a>
-
             <div>
                 <b class="text-light">Sample Scheduling</b>
             </div>
         </div>
     </nav>
+    <div class="one">
+    <button id="current">Current</button>
+    OR
+    <button onclick="document.getElementById('custom').style.display='block';">Custom</button>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="loadbranch">
+</div>
+    <div id="custom">
     <label>Choose degree:</label>  
 <select name="degree" id="degree">
     <option value="BE/BTECH">B.E/B.TECH</option>
@@ -92,14 +109,13 @@ $dbname   ='vpanel';
     <option value="8">8</option>
     </select>
     <button id="load1">Search</button>
-    <div id="loadbranch">
 
-</div>
     <div class="container py-5" id="page-container">
         <div class="row">
             <div class="col-md-9">
                 <div id="calendar"></div>
             </div>
+    </div>
             <div class="col-md-3">
                 <div class="cardt rounded-0 shadow">
                     <div class="card-header bg-gradient bg-primary text-light">
@@ -203,8 +219,8 @@ foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
 if(isset($conn)) $conn->close();
 ?>
 </body>
-<script>
-    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>')
+<script type="text/javascript">
+    var scheds = $.parseJSON('<?= json_encode($sched_res) ?>');
 </script>
 <script src="./js/script.js"></script>
 <script src="./js/jquery-3.6.0.min.js"></script>
@@ -213,7 +229,8 @@ if(isset($conn)) $conn->close();
     //     console.log("hi");
     //     document.getElementById("description").value = e.target.value;
     // })
-
+    var scheds2 = JSON.parse('<?= json_encode($json_data) ?>');
+    console.log(scheds2);
     $("#load1").on('click',function(e){
         e.preventDefault();
         let branch = $("#branch").val();
@@ -228,6 +245,33 @@ if(isset($conn)) $conn->close();
         data:{branch:branch,sem:sem,degree:degree},
         success:function(data){
             $("#loadbranch").html(data);
+        }
+    })
+})
+$("#current").on("click",function(){
+    $.ajax({
+        url:"current.php",
+        type:"GET",
+        // data:{branch:branch,sem:sem,degree:degree},
+        success:function(data){
+            console.log(data.length)
+            if(data.length == 0){
+                $("#loadbranch").html("<h2>No data aviable</h2>");
+            }
+            else{
+            $.each(JSON.parse(data),function(ind,val){
+                console.log(val.id,val.sem,val.branch,val.degree);
+                $.ajax({
+                    url:"loadbranch.php",
+                    type:"POST",
+                    data:{branch:val.branch,sem:val.sem,degree:val.degree,class:val.class,sub:val.subject,startt:val.startt,endd:val.endd},
+                    success:function(data){
+                        console.log(data);
+                        $("#loadbranch").html(data);
+                    }
+                })
+            })
+        }
         }
     })
 })
