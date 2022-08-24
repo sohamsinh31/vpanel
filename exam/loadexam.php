@@ -20,7 +20,7 @@ if(mysqli_num_rows($result) > 0 ){
                 $rrr = $row['pdfurl'];
                 $output .= '<td>
                 <a href="../admin/'.$row['pdfurl'].'" style="color:inherit;">
-                <button>
+                <button class="button">
                 <div id="classes">
             '.$row['date'].'
                 </div>

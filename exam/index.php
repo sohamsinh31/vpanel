@@ -3,6 +3,7 @@ session_start();
 if(!isset($_SESSION['id'])){
     header('location:../login');
 }
+include('../header.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +27,9 @@ if(!isset($_SESSION['id'])){
             text-align:center;
             background-color:#ffffff10;
             backdrop-filter: blur(12px);
+           
         }
-        button{
+        .button{
             background-color: transparent;
             color: white;
             width: 100%;
@@ -54,6 +56,7 @@ if(!isset($_SESSION['id'])){
             text-align:center;
             background-color:#ffffff10;
             backdrop-filter: blur(12px);
+            margin:5px;
         }
     </style>
 </head>

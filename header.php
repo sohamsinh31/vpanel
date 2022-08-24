@@ -334,8 +334,10 @@ Sidebar
 				$result = mysqli_query($con,$q);
 				$num = mysqli_num_rows($result);
 				$id = $_SESSION['id'];
+                $enroll = '';
 				if($num>0){
 					while($row = mysqli_fetch_assoc($result)){
+                        $enroll.=$row['enrollment'];
 					  echo  "<img class='app_header_image' src='".$row['photourl']."' alt=''>";
 					}
 				}
@@ -348,7 +350,7 @@ Sidebar
         <div class="sidebar-header">
         <button class="close-btn"><i class="fas fa-times"></i></button>
         </div>
-        <h6 style="text-align: center;">student name</h6>
+        <h6 style="text-align: center;"><?php echo $enroll; ?></h6>
 
         <ul class="links">
         <li>
@@ -373,7 +375,7 @@ Sidebar
             </li>
             <hr>
             <li>
-                <a href="timetable">Exam Timetable</a>
+                <a href="exam/index">Exam Timetable</a>
             </li>
             <hr>
             <li>
