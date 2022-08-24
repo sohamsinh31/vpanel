@@ -48,11 +48,11 @@ $dbname   ='vpanel';
             border-style: solid;
             border-width: 1px !important;
         }
-        #custom{
+        /* #custom{
             display:none;
-        }
+        } */
         .one{
-            left:25%;
+            left:45%;
             position:absolute;
         }
     </style>
@@ -71,8 +71,8 @@ $dbname   ='vpanel';
     </nav>
     <div class="one">
     <button id="current">Current</button>
-    OR
-    <button onclick="document.getElementById('custom').style.display='block';">Custom</button>
+    <h4>OR SELECT BRANCHES MANUALLY</h4>
+    <!-- <button onclick="document.getElementById('custom').style.display='block';">Custom</button> -->
     </div>
     <br>
     <br>
@@ -80,14 +80,17 @@ $dbname   ='vpanel';
     <div id="loadbranch">
 </div>
     <div id="custom">
+<form enctype="multipart/form-data" method="POST" action="">
     <label>Choose degree:</label>  
 <select name="degree" id="degree">
+<option value="none">-</option>
     <option value="BE/BTECH">B.E/B.TECH</option>
     <option value="BSC">B.Sc</option>
     <option value="DIPLOMA">Diploma</option>
     </select>
     <label>Choose branch:</label>  
 <select name="branch" id="branch">
+<option value="none">-</option>
     <option value="CS">Computer science and engineering</option>
     <option value="IE">Information technology and engineering</option>
     <option value="IT">Information technology</option>
@@ -99,6 +102,7 @@ $dbname   ='vpanel';
     </select>
     <label>Choose sem:</label>
     <select id="sem" name="semester">
+    <option value="none">-</option>
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -108,14 +112,15 @@ $dbname   ='vpanel';
     <option value="7">7</option>
     <option value="8">8</option>
     </select>
-    <button id="load1">Search</button>
+    <button type="submit" onclick="return foo();" id="load1">Search</button>
+    <!-- <button type="submit">Submit</button> -->
+    </form>
 
     <div class="container py-5" id="page-container">
         <div class="row">
             <div class="col-md-9">
-                <div id="calendar"></div>
+            <div id="calendar"></div>
             </div>
-    </div>
             <div class="col-md-3">
                 <div class="cardt rounded-0 shadow">
                     <div class="card-header bg-gradient bg-primary text-light">
@@ -170,6 +175,7 @@ $dbname   ='vpanel';
             </div>
         </div>
     </div>
+
     <!-- Event Details Modal -->
     <div class="modal fade" tabindex="-1" data-bs-backdrop="static" id="event-details-modal">
         <div class="modal-dialog modal-dialog-centered">
@@ -207,17 +213,28 @@ $dbname   ='vpanel';
     <!-- Event Details Modal -->
 
 <?php 
-$schedules = $conn->query("SELECT * FROM `schedule_list`");
 $sched_res = [];
+if($_POST['semester']){
+$tid = $_SESSION['id2'];
+$branch = $_POST['branch'];
+$sem = $_POST['semester'];
+$deg = $_POST['degree'];
+$q = "SELECT * FROM timetable WHERE teacherid = '$tid' AND branch = '$branch' AND sem = '$sem' AND degree = '$deg'";
+$result = $conn->query($q);
+foreach ($result->fetch_all(MYSQLI_ASSOC) as $val){
+    $sub = $val['subject'];
+$schedules = $conn->query("SELECT * FROM `schedule_list` WHERE title = '$sub'");
 foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
     $row['sdate'] = date("F d, Y h:i A",strtotime($row['start_datetime']));
     $row['edate'] = date("F d, Y h:i A",strtotime($row['end_datetime']));
     $sched_res[$row['id']] = $row;
 }
+}
+}
 ?>
-<?php 
+<!-- <?php 
 if(isset($conn)) $conn->close();
-?>
+?> -->
 </body>
 <script type="text/javascript">
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>');
@@ -229,8 +246,6 @@ if(isset($conn)) $conn->close();
     //     console.log("hi");
     //     document.getElementById("description").value = e.target.value;
     // })
-    var scheds2 = JSON.parse('<?= json_encode($json_data) ?>');
-    console.log(scheds2);
     $("#load1").on('click',function(e){
         e.preventDefault();
         let branch = $("#branch").val();
@@ -292,6 +307,10 @@ function deleteAbsent(name){
 function deletePresent(name){
 
 }
+function foo() {
+            // alert("Submit button clicked!");
+            return true;
+         }
 function handlechange(name){
     let elemm = document.getElementById("description").value;
     let index =elemm.indexOf(name);
