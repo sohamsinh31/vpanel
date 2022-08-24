@@ -242,32 +242,10 @@ if(isset($conn)) $conn->close();
 <script src="./js/script.js"></script>
 <script src="./js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-    // $("#attandance").on("click",function(e){
-    //     console.log("hi");
-    //     document.getElementById("description").value = e.target.value;
-    // })
-    $("#load1").on('click',function(e){
-        e.preventDefault();
-        let branch = $("#branch").val();
-        let sem = $("#sem").val();
-        let degree = $("#degree").val();
-        document.getElementById('branch2').value = branch;
-        document.getElementById('degree2').value = degree;
-        document.getElementById('semester2').value = sem;
-    $.ajax({
-        url:"loadbranch.php",
-        type:"POST",
-        data:{branch:branch,sem:sem,degree:degree},
-        success:function(data){
-            $("#loadbranch").html(data);
-        }
-    })
-})
 $("#current").on("click",function(){
     $.ajax({
         url:"current.php",
         type:"GET",
-        // data:{branch:branch,sem:sem,degree:degree},
         success:function(data){
             console.log(data.length)
             if(data.length == 0){

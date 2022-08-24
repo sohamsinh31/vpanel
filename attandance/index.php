@@ -151,8 +151,10 @@ $sid = $_SESSION['id'];
 $q1 = "SELECT * FROM `studentinfo` WHERE id='$sid' ";
 $result = $conn->query($q1);
 $num = mysqli_num_rows($result);
+$enroll = '';
 if($num>0){
 foreach($result->fetch_all(MYSQLI_ASSOC) as $row2){
+    $enroll .= $row2['enrollment'];
     $branch=$row2['branch'];
     $degree = $row2['degree'];
     $semester = $row2['semester'];
@@ -175,6 +177,7 @@ if(isset($conn)) $conn->close();
 </body>
 <script>
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>');
+    var enrollment = '<?php echo $enroll; ?>';
 </script>
 <script src="./js/jquery-3.6.0.min.js"></script>
 <script src="./js/script.js"></script>

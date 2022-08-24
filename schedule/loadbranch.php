@@ -1,17 +1,29 @@
 <?php
+if($_SERVER['REQUEST_METHOD'] !='POST'){
+    echo "<script> alert('Error: No data to save.'); location.replace('./index') </script>";;
+    exit;
+}
+session_start();
+if(!isset($_SESSION['id2'])){
+    echo "<script> alert('Bhai login karlo pahele');</script>";
+}
 $branch = $_POST['branch'];
 $sem = $_POST['sem'];
 $degree = $_POST['degree'];
 $class = $_POST['class'];
 $subject = $_POST['sub'];
 $startt = $_POST['startt'];
+$start1 = explode(" ",$startt)[0];
+$start2 = explode(" ",$startt)[1]; 
 $endd = $_POST['endd'];
+$end1 = explode(" ",$endd)[0];
+$end2 = explode(" ",$startt)[1];
 include("db-connect.php");
 $q = "SELECT * FROM studentinfo WHERE branch = '$branch' AND semester = '$sem' AND degree = '$degree'ORDER BY enrollment ASC";
 $result = $conn->query($q);
 $num = $result->num_rows;
 $output = '<h4>Your current class is:'.$class.' and subject is:'.$subject.'</h4>
-<form id="form1" method="POST" enctype="multipart/form-data" action="savesched.php">';
+<form id="form1" method="POST" enctype="multipart/form-data" action="savesched">';
 if($num>0){
 while($row = $result->fetch_assoc()){
     $enrolllment = "'".$row['enrollment']."'";
@@ -19,12 +31,14 @@ while($row = $result->fetch_assoc()){
     ';
 }
 $output .= '
-<input type="hidden" name="startt" value='.$startt.'>
-<input type="hidden" name="startt" value='.$startt.'>
-<input type="hidden" name="startt" value='.$startt.'>
-<input type="hidden" name="startt" value='.$startt.'>
-<input type="hidden" name="startt" value='.$startt.'>
-<input type="hidden" name="endd" value='.$endd.'>
+<input type="hidden" name="branch" value='.$branch.'>
+<input type="hidden" name="sem" value='.$sem.'>
+<input type="hidden" name="degree" value='.$degree.'>
+<input type="hidden" name="sub" value='.$subject.'>
+<input type="hidden" name="start1" value='.$start1.'>
+<input type="hidden" name="start2" value='.$start2.'>
+<input type="hidden" name="end1" value='.$end1.'>
+<input type="hidden" name="end2" value='.$end2.'>
 <button type="submit">submit</button>
 </form>';
 echo $output;

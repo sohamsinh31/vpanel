@@ -5,7 +5,12 @@ $(function() {
     if (!!scheds) {
         Object.keys(scheds).map(k => {
             var row = scheds[k]
-            events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime });
+            if(row.description.indexOf(enrollment)>=0){
+            events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
+            }
+            else{
+                events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime,backgroundColor:'red',color:'red',rendering: 'background' });
+            }
         })
     }
     var date = new Date()
@@ -21,16 +26,14 @@ $(function() {
             center: 'title',
         },
         selectable: false,
-        themeSystem: 'bootstrap',
-        //Random default events
         events: events,
         eventClick: function(info) {
             var _details = $('#event-details-modal')
             var id = info.event.id
             if (!!scheds[id]) {
                 _details.find('#title').text(scheds[id].title)
-                _details.find('#description').text(scheds[id].description)
-                _details.find('#absent').text(scheds[id].absent)
+                // _details.find('#description').text(scheds[id].description)
+                // _details.find('#absent').text(scheds[id].absent)
                 _details.find('#start').text(scheds[id].sdate)
                 _details.find('#end').text(scheds[id].edate)
                 _details.find('#edit,#delete').attr('data-id', id)

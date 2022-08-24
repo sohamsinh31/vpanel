@@ -1,5 +1,12 @@
 <?php
+if($_SERVER['REQUEST_METHOD'] !='POST'){
+    echo "<script> alert('Error: No data to save.'); location.replace('./index') </script>";
+    exit;
+}
 session_start();
+if(!isset($_SESSION['id2'])){
+    echo "<script> alert('Bhai login karlo pahele');</script>";
+}
 $tid = $_SESSION['id2'];
 date_default_timezone_set('Asia/Calcutta');
 $con = mysqli_connect('localhost','root','');
@@ -23,7 +30,7 @@ while($row = $result->fetch_assoc()){
         $endd = $datetime." ".$end;
         $arr = array(
             "startt"=>$startt,
-            "endd"=>$end
+            "endd"=>$endd
         );
         // echo $startt."<br>";
         // echo $endd;
