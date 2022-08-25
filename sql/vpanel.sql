@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 24, 2022 at 06:28 PM
+-- Generation Time: Aug 25, 2022 at 06:32 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -187,7 +187,8 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`id`, `teachername`, `degree`, `branch`, `profession`, `email`, `password`) VALUES
-(4, 'vikas s. chomal', 'BE/BTECH', 'CSE', 'Computer', 'vikas@gmail.com', '1234567');
+(4, 'teacher', 'BE/BTECH', 'CSE', 'Computer', 'teacher@gmail.com', '1234567'),
+(5, 'Admin', 'BE/BTECH', 'CSE', 'Admin of collage', 'superuser@gmail.com', '1234567');
 
 -- --------------------------------------------------------
 
@@ -299,7 +300,7 @@ ALTER TABLE `studentinfo`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `timetable`

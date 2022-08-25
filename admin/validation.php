@@ -40,7 +40,7 @@ if($num == 1){
       if($next){
         header('location:'.$next.'');
       }
-      header('location:index');
+      // header('location:index');
     }
 }
 else{

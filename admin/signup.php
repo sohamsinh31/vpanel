@@ -43,7 +43,7 @@
 <label>Email:</label><input type="email" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="email">
                     <br>
                     <label>Choose password:</label><input type="password" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="password">
-                    <label>Proffesion:</label><input type="email" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="prof">
+                    <label>Proffesion:</label><input type="text" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="prof">
     <button style="background-color:blue;border-radius:12px;width:30%;color:white;" onclick="return clickme();" class="btn btn-primary" type="submit"  name="submit">UPLOAD</button>
     </form>
     </div>

@@ -26,7 +26,7 @@ else {
         header('location:login');
     }
     else{
-        $qy = "INSERT into `teacher` (`teachername`,`degree`,`branch`,`email`,`password`,`proffesion`) values ('$name','$degree','$branch','$email','$password','$prof')";
+        $qy = "INSERT into `teacher` (`teachername`,`degree`,`branch`,`email`,`password`,`profession`) values ('$name','$degree','$branch','$email','$password','$prof')";
         mysqli_query($con,$qy) or die('Error: '. mysqli_error($con) );
         echo "success";
         header('location:login');

@@ -1,41 +1,88 @@
 <?php
 session_start();
 if(!isset($_SESSION['id2'])){
-    header('location:../login.php?next="timetable/index"');
+    header('location:../../admin/login.php?next="superuser/timetable/index"');
 }
 $con = mysqli_connect('localhost','root','');
 mysqli_select_db($con,'vpanel');
 $query = "SELECT * FROM teacher";
 $result = $con->query($query);
-echo "id  name <br>";
+$output1 = '
+<table class="table table-bordered">
+<tr class="success">
+<th>Teacherid</th>
+<th>Name</th>
+</tr>
+';
 while($row = $result->fetch_assoc()){
-    echo $row['id']." ".$row['teachername'];
+    $output1 .= '<tr><td>'.$row['id'].'</td><td>'.$row['teachername'].'</td></tr>';
 }
+$output1.='</table>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
 <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
     <meta charset="UTF-8">
+    <style>
+        .nopadding {
+    padding: 0 !important;
+}
+
+.content {
+    padding: 20px;
+}
+.scrolll{
+    overflow:scroll;
+}
+    </style>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>   
-<!-- $output = " -->
+<body>
+    <div id="row">
+    <div class="col-sm-4">.</div>
+  <div class="col-sm-4"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show teachers</button>
+</div>
+  <div class="col-sm-4"></div>
+    </div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Teacher</h4>
+      </div>
+      <div class="modal-body">
+        <p><?php echo $output1; ?></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <form method='post' action='insert' enctype='multipart/form-data'>
-        <table border='1' width='25%'>
-            <tr>
-            <td>starttime</td>
-            <td>endtime</td>
-            <td>class</td>
-            <td>Teacherid</td>
-            <td>subject</td>
-            <td>Branch</td>
-            <td>Sem</td>
-            <td>Degree</td>
-            <td></td>
+        <table class="table table-bordered" border='1' width='25%'>
+            <tr class="success">
+            <th>Starttime</th>
+            <th>Endtime</th>
+            <th>Class</th>
+            <th>Teacherid</th>
+            <th>Subject</th>
+            <th>Branch</th>
+            <th>Sem</th>
+            <th>Degree</th>
+            <th></th>
             </tr>
 <!--  $output .= " -->
             <tr id='111'>
@@ -96,24 +143,22 @@ while($row = $result->fetch_assoc()){
             </td>
             <td><button style="background-color:red;color:white;" onclick="deletefun(222)">Delete</button></td>
             </tr>
-
             </table>
-            <table border='1' id='table'></table>
-            <button id='clickme'>Add</button>
-            <button type='submit'>Submit</button>
+            <table class="table table-bordered" width="25%" border='1' id='table'>
+            </table>
+            <button class="btn btn-primary" id='clickme'>Add</button>
+            <button class="btn btn-success" type='submit'>Submit</button>
             </form>
-<!-- echo $output;
-?> -->
 </body>
-<script src="../js/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     let i = 0;
     let html = ``;
     $("#clickme").on("click",function(e){ 
         let data =`
         <tr id='${i}'>
-            <td><input type='time' name='start[]' required/></td>
-            <td><input type='time' name='end[]'required/></td>
+            <td><input type='time' value="16:32:55"  name='start[]' required/></td>
+            <td><input type='time' value="17:32:55"  name='end[]'required/></td>
             <td><input type='text' name='class[]'required/></td>
             <td><input type='text' name='id[]' required/></td>
             <td><input type='text' name='sub[]' required/></td>
