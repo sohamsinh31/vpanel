@@ -9,6 +9,7 @@ mysqli_select_db($con,'vpanel');
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -21,6 +22,9 @@ mysqli_select_db($con,'vpanel');
     <title>Update</title>
 </head>
 <body>
+  <div id="all">
+
+  </div>
 <div id="row">
     <div class="col-sm-4">.</div>
   <div class="col-sm-4"><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Show teachers</button>
@@ -108,7 +112,7 @@ while($row = $result->fetch_assoc()){
             </select>
             <td><input type='hidden' value='".$row['id']."' name='tid'><button id='updatet' class='btn btn-success btn-sm'>Update</button></td>
             </td>
-            <td><button class='btn btn-danger btn-sm' onclick='deletefun(".$row['id'].")'>Delete</button></td>
+            <td><button class='btn btn-danger btn-sm' data-id='".$row['id']."' id='deletefun'>Delete</button></td>
             </tr>
 </form>
 ";
@@ -116,4 +120,27 @@ while($row = $result->fetch_assoc()){
 ?>
 </table>
 </body>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $("#deletefun").on("click",function(e){
+    e.preventDefault();
+    var id = this.getAttribute("data-id")
+    $.ajax({
+      url:'tables.php',
+      type:'POST',
+      data:{id:id},
+      success:function(data){
+        htmll = `<div class="alert alert-success alert-dismissible">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Success!</strong> Table deleted successfully.
+</div>`;
+        if(data){
+          document.getElementById("all").innerHTML=htmll;
+          
+        }
+      }
+    })
+  })
+});
+</script>
 </html>

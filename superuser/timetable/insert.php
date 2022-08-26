@@ -1,8 +1,30 @@
 <?php
-$start = $_POST['start'];
-$total = sizeof($start);
 $con = mysqli_connect('localhost','root','');
 mysqli_select_db($con,'vpanel');
+if(isset($_POST['tid'])){
+    $startt = $_POST['start'];
+    $end = $_POST['end'];
+    $class = $_POST['class'];
+    $branch = $_POST['branch'];
+    $sem = $_POST['sem'];
+    $degree = $_POST['degree'];
+    $id = $_POST['id'];
+    $tid = $_POST['tid'];
+    $subj = $_POST['sub'];
+    $the_time = date('h:i:s', strtotime($startt));
+    $the_time2 = date('h:i:s', strtotime($end));
+    echo $tid.$the_time2;
+    $q = "UPDATE timetable SET teacherid='$id',branch='$branch',subject='$subj',sem='$sem',degree='$degree',class='$class',starttime='$the_time',endtime='$the_time2' WHERE id='$tid'";
+    if($con->query($q)){
+        header('location:tables');
+    }
+    else{
+        echo "ERROR";
+    }
+}
+else{
+$start = $_POST['start'];
+$total = sizeof($start);
 for($i=0;$i<$total;$i++){
     $startt = $_POST['start'][$i];
     $end = $_POST['end'][$i];
@@ -23,5 +45,6 @@ for($i=0;$i<$total;$i++){
     else{
         echo "ERROR";
     }
+}
 }
 ?>
