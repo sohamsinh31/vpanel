@@ -12,7 +12,6 @@
         var d = date.getDate(),
             m = date.getMonth(),
             y = date.getFullYear()
-console.log(events[0])
         calendar = new Calendar(document.getElementById('calendar'), {
             headerToolbar: {
                 left: 'prev,next today',

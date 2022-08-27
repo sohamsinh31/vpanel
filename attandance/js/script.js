@@ -6,10 +6,10 @@ $(function() {
         Object.keys(scheds).map(k => {
             var row = scheds[k]
             if(row.description.indexOf(enrollment)>=0){
-            events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
+            events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
             }
             else{
-                events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime,backgroundColor:'red',color:'red',rendering: 'background' });
+                events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'red',color:'red',rendering: 'background' });
             }
         })
     }
@@ -19,14 +19,16 @@ $(function() {
         y = date.getFullYear()
 
     calendar = new Calendar(document.getElementById('calendar'), {
-        initialView: 'timeGridWeek',
+        initialView: 'dayGridMonth',
+        height: 850,
+        themeSystem:'bootstrap',
         headerToolbar: {
             left: 'prev,next today',
             right: 'dayGridMonth,dayGridWeek,list',
             center: 'title',
         },
-        selectable: false,
         events: events,
+        selectable: false,
         eventClick: function(info) {
             var _details = $('#event-details-modal')
             var id = info.event.id
