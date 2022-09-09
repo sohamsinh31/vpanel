@@ -11,7 +11,7 @@ if(!isset($_SESSION['id2'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam</title>
-    <link id="stylesheet" rel="stylesheet" type="text/css" href="../styles.css"/>  
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="../../styles.css"/>  
     <style>
         body {
             background-color:#0e0e0e;
@@ -123,7 +123,7 @@ if(!isset($_SESSION['id2'])){
 
     </div>
 </body>
-<script src="js/jquery.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
       $(document).ready(function(){
     // Load Table Records

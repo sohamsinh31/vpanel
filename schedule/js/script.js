@@ -5,7 +5,7 @@
         if (!!scheds) {
             Object.keys(scheds).map(k => {
                 var row = scheds[k]
-                events.push({ id: row.id, title: row.title, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
+                events.push({ id: row.id, title: row.title, start: row.start_datetime,allDay:true, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
             })
         }
         var date = new Date()
@@ -18,6 +18,9 @@
                 right: 'dayGridMonth,dayGridWeek,list',
                 center: 'title',
             },
+            initialView: 'dayGridMonth',
+            height: 850,
+            themeSystem:'bootstrap',
             selectable: true,
             // events: {
             //     url:'testing/file.php'

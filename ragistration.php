@@ -35,7 +35,7 @@ else {
     $english = $_POST['english'];
     $maths = $_POST['maths_theorey'];
     $percentage = $_POST['percentage'];
-    $degree = $_POST['degree'];
+    // $degree = $_POST['degree'];
     $branch = $_POST['branch'];
     $year = $_POST['year'];
     $semester = $_POST['semester'];
@@ -49,7 +49,7 @@ else {
         echo "user already exists";
     }
     else{
-        $qy = "INSERT into `studentinfo`(studentname,dob,age,gender,address,pincode,mobile,email,password,photourl,fathername,proffesionf,mobilef,mothername,proffesionm,mobilem,physicst,physicsp,chemistryt,chemistryp,mathst,english,percentage,degree,branch,year,semester) values ('$name','$date','$age','$gender','$address','$pincode','$mobile','$email','$password','$target_file','$fathername','$proffessionf','$mobilef','$mothername','$proffessionm','$mobilem','$physicst','$physicsp','$chemistryt','$chemistryp','$maths','$english','$percentage','$degree','$branch','$year','$semester')";
+        $qy = "INSERT into `studentinfo`(studentname,dob,age,gender,address,pincode,mobile,email,password,photourl,fathername,proffesionf,mobilef,mothername,proffesionm,mobilem,physicst,physicsp,chemistryt,chemistryp,mathst,english,percentage,branchid,year,semester) values ('$name','$date','$age','$gender','$address','$pincode','$mobile','$email','$password','$target_file','$fathername','$proffessionf','$mobilef','$mothername','$proffessionm','$mobilem','$physicst','$physicsp','$chemistryt','$chemistryp','$maths','$english','$percentage','$branch','$year','$semester')";
         mysqli_query($con,$qy);
         userimage();
         enrollment($branch,$degree);

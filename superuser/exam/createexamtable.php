@@ -10,7 +10,7 @@ if($_FILES['file']['name'] != ''){
         $test = explode('.', $_FILES['file']['name']);
         $extension = end($test);    
         $name = rand(100,999).'.'.$extension;
-        $location = 'attachements/exam/'.$name;
+        $location = '../../admin/attachements/exam/'.$name;
         if(move_uploaded_file($_FILES['file']['tmp_name'], $location)){
             $q = "INSERT INTO examtable(`pdfurl`,`date`,`sem`,`degree`) values ('{$location}','{$date}','{$sem}','{$degree}')";
             mysqli_query($con,$q) or die("failed");

@@ -354,32 +354,32 @@ Sidebar
 
         <ul class="links">
         <li>
-                <a href="index">Home</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/index' ?>">Home</a>
             </li>
             <hr>
             <li>
-                <a href="attandance/index">Attendence</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/attandance/index' ?>">Attendence</a>
             </li>
             <hr>
 
             <li>
-                <a href="fees">Academic Fees</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/fees/index' ?>">Academic Fees</a>
             </li>
             <hr>
             <li>
-                <a href="notices">Academic Notices</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/timeline' ?>">Academic Notices</a>
             </li>
             <hr>
             <li>
-                <a href="courceout">Course Outline</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/courceout' ?>">Course Outline</a>
             </li>
             <hr>
             <li>
-                <a href="exam/index">Exam Timetable</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/exam/index' ?>">Exam Timetable</a>
             </li>
             <hr>
             <li>
-                <a href="repository">repository</a>
+                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/repository' ?>">repository</a>
             </li>
         </ul>
 

@@ -1,5 +1,9 @@
 <?php
-// session_start();
+set_time_limit(0);
+ini_set('memory_limit', '20000M');
+session_start();
+include('function.php');
+
 // if(!isset($_SESSION['username'])){
 //  echo "not logged in";
 // }
@@ -10,6 +14,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+
+
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
 <link id="stylesheet" rel="stylesheet" type="text/css" href="styles.css"/>  
 <meta charset="UTF-8">
@@ -79,29 +90,40 @@
             <label>Total precentage(as per marksheet):</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="percentage" class="form-control">
             <br>
             <hr>
-            <label>For collage information</label>
+            <label style="color:gold;">For collage information</label>
             <hr>
-            <label>Choose degree:</label>  
+            <?php
+            $q="SELECT * FROM `branches`";
+            $result=$con->query($q);
+            $row = $result->fetch_all(MYSQLI_ASSOC);
+            $branches=array();
+            $branchesn=array();
+            $degree = array();
+            foreach($row as $r){
+                array_push($degree,$r['degree']);
+                 array_push($branches,$r['name']);
+                array_push($branchesn,$r['id']);
+            }
+            ?>
+            <!-- <label>Choose degree:</label>  
 <select name="degree">
     <option value="BE/BTECH">B.E/B.TECH</option>
     <option value="BSC">B.Sc</option>
     <option value="DIPLOMA">Diploma</option>
-    </select>
+    </select> -->
     <label>Choose branch:</label>  
-<select name="branch">
-    <option value="CS">Computer science and engineering</option>
-    <option value="IE">Information technology and engineering</option>
-    <option value="IT">Information technology</option>
-    <option value="CH">Chemical engineering</option>
-    <option value="CV">Civil engineering</option>
-    <option value="MH">Mechanical engineering</option>
-    <option value="CE">Computer engineering</option>
-    <option value="PE">Pharmasutical engineering</option>
-    </select>
+    <?php
+echo '<select class="form-control selectpicker"  name="branch" data-live-search="true">';
+for($i=0;$i<sizeof($branches);$i++){
+    echo '<option value="'.$branchesn[$i].'">'.$degree[$i].'-'.$branches[$i].'</option>';
+}
+
+    echo '</select>';
+    ?>
     <label>Acadamic year:20</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="year" class="form-control">
     <br>
     <label>Choose sem:</label>
-    <select id="sem" name="semester">
+    <select class="form-control selectpicker" data-live-search="true" id="sem" name="semester">
     <option value="1">1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -124,4 +146,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 <script src="script.js"></script>
+<script>
+    $(function() {
+  $('.selectpicker').selectpicker();
+});
+</script>
 </html>

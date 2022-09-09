@@ -7,9 +7,8 @@ $r2 = mysqli_query($con,$q);
 $r1 = mysqli_num_rows($r2);
 if($r1>0){
     while($row2=mysqli_fetch_assoc($r2)){
-$branch = $row2['branch'];
-$degeee = $row2['degree'];
-$sql = "SELECT * FROM classes where degree='$degeee' AND branch='$branch'";
+$branch = $row2['branchid'];
+$sql = "SELECT * FROM classes where branch='$branch'";
 $result = mysqli_query($con, $sql) or die("SQL Query Failed.");
 $output = "";
 if(mysqli_num_rows($result) > 0 ){
