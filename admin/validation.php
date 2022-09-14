@@ -38,7 +38,7 @@ if($num == 1){
     while($row = mysqli_fetch_assoc($result)){
       $_SESSION['id2'] = $row['id'];
       if($next){
-        header('location:'.$next.'');
+        header('location:http://'.$_SERVER['SERVER_NAME'].$next.'');
       }
       // header('location:index');
     }

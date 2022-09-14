@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['id'])){
-    header('location:../login');
+  header('location:http://'.$_SERVER['SERVER_NAME'].'/login?next='.$_SERVER['REQUEST_URI']);
 }
 include('../header.php');
 ?>

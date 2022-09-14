@@ -1,9 +1,9 @@
 
 <?php require_once('db-connect.php');
 session_start(); 
-if(!$_SESSION['id']){
-    header('location:../login');
-}
+if(!isset($_SESSION['id'])){
+    header('location:http://'.$_SERVER['SERVER_NAME'].'/login?next='.$_SERVER['REQUEST_URI']);
+  }
 $sid = $_SESSION['id'];
 $con = mysqli_connect("localhost","root","","vpanel");
 $qq="SELECT * FROM `studentinfo` WHERE id='{$sid}'";
@@ -15,8 +15,7 @@ $enrollmentt='';
 $q3 = " SELECT DISTINCT title FROM `schedule_list` WHERE description LIKE '%{$enrollmentt}%'";
 $result3 = mysqli_query($con,$q3);
 while($roww=mysqli_fetch_assoc($rrr)){
-    $branchh.=$roww['branch'];
-    $degreee.=$roww['degree'];
+    $branchh.=$roww['branchid'];
     $semesterr.=$roww['semester'];
     $enrollmentt=$roww['enrollment'];
 }
@@ -93,8 +92,8 @@ $percentage = (100*$avg)/$sum."%";
     <?php
     while($row=mysqli_fetch_assoc($result3)){
         $subject = $row['title'];
-        $query="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}' AND description LIKE '%{$enrollmentt}%'";
-        $query2="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND degree='{$degreee}' AND semester='{$semesterr}'AND absent LIKE '%{$enrollmentt}%'";
+        $query="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}' AND semester='{$semesterr}' AND description LIKE '%{$enrollmentt}%'";
+        $query2="SELECT * FROM `schedule_list` WHERE title='$subject' AND branch='{$branchh}'  AND semester='{$semesterr}'AND absent LIKE '%{$enrollmentt}%'";
         $resultt = mysqli_query($con,$query);
         $resultt2 = mysqli_query($con,$query2);
         $numm = mysqli_num_rows($resultt);
@@ -155,10 +154,9 @@ $enroll = '';
 if($num>0){
 foreach($result->fetch_all(MYSQLI_ASSOC) as $row2){
     $enroll .= $row2['enrollment'];
-    $branch=$row2['branch'];
-    $degree = $row2['degree'];
+    $branch=$row2['branchid'];
     $semester = $row2['semester'];
-$schedules = $conn->query("SELECT * FROM `schedule_list` WHERE branch='$branch' AND degree='$degree' AND semester='$semester'");
+$schedules = $conn->query("SELECT * FROM `schedule_list` WHERE branch='$branch' AND semester='$semester'");
 $sched_res = [];
 foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
     $row['sdate'] = date("F d, Y h:i A",strtotime($row['start_datetime']));

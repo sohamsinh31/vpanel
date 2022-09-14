@@ -1,7 +1,7 @@
 <?php
 session_start();
 //$tid = $_SESSION['id2'];
-include("../function.php");
+include("../../function.php");
 
 $sql = "SELECT * FROM examtable";
 $result = mysqli_query($con, $sql) or die("SQL Query Failed.");

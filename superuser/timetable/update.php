@@ -1,8 +1,9 @@
 <?php
 session_start();
 if(!isset($_SESSION['id2'])){
-    header('location:../../admin/login.php?next="superuser/timetable/index"');
+  header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
+include('../header.php');
 $con = mysqli_connect('localhost','root','');
 mysqli_select_db($con,'vpanel');
 ?>
@@ -16,6 +17,11 @@ mysqli_select_db($con,'vpanel');
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
 <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
+<style>
+  body{
+    background-color:black;
+  }
+</style>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

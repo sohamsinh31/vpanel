@@ -3,31 +3,16 @@ session_start();
 if(!isset($_SESSION['id2'])){
   header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
-include('../../function.php');
 include('../header.php');
-$q="SELECT DISTINCT degree FROM `branches` ORDER BY degree";
-$result=$con->query($q);
-$row = $result->fetch_all(MYSQLI_ASSOC);
-$branches=array();
-$branchesn=array();
-$degree = array();
-foreach($row as $r){
-    array_push($degree,$r['degree']);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
-<link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam</title>
+    <title>classes</title>
     <link id="stylesheet" rel="stylesheet" type="text/css" href="../../styles.css"/>  
     <style>
         body {
@@ -79,7 +64,7 @@ foreach($row as $r){
     <table id="main" border="0" cellspacing="0">
     <tr>
       <td id="header">
-        <h1>Exams</h1>
+        <h1>Classes</h1>
         <button>
     <div id="createclass">
         +
@@ -92,51 +77,62 @@ foreach($row as $r){
     </tr>
     <tr>
       <td id="table-data">
+      
       </td>
     </tr>
   </table>
   </button>
     <div id="toCreate">
         <a href="javascript:void(0)" onclick="document.getElementById('toCreate').style.display='none';" style="float:right;font-size:22px;color:inherit;">X</a>
-    <label>Exam time table info:</label>
+    <label>Class subject:</label>
                 <br>
-                <input id="pdf" style="width:100%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="file" name="pdf" class="form-control">
-                <label>Date:</label>
-                <input style="width:100%;float:right;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="date" name="date" id="date">
+                <input id="subject" style="width:100%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" class="form-control">
                 <br>
+                <label>Teacher name:</label>
+                <br>
+                <input id="name" style="width:100%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" class="form-control">
+                <br>
+                <label>Choose degree:</label> 
+                <select id="degree" name="degree">
+    <option value="BE/BTECH">B.E/B.TECH</option>
+    <option value="BSC">B.Sc</option>
+    <option value="DIPLOMA">Diploma</option>
+    </select>
+    <br>
     <label>Choose branch:</label>  
-    <?php
-echo '<select id="degree" class="form-control selectpicker"  name="branch" data-live-search="true">';
-for($i=0;$i<sizeof($degree);$i++){
-    echo '<option value="'.$degree[$i].'">'.$degree[$i].'</option>';
-}
-
-    echo '</select>';
-    ?>
-                <br>
-                <label>Choose sem:</label>
-                <select id="sem" name="semester">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                </select>
-                <br>
+<select id="branch" name="branch">
+    <option value="CS">Computer science and engineering</option>
+    <option value="ITE">Information technology and engineering</option>
+    <option value="IT">Information technology</option>
+    <option value="CH">Chemical engineering</option>
+    <option value="CV">Civil engineering</option>
+    <option value="MH">Mechanical engineering</option>
+    <option value="CE">Computer engineering</option>
+    <option value="PE">Pharmasutical engineering</option>
+    </select>
+    <br>
+    <label>Choose sem:</label>
+    <select id="sem" name="semester">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    </select>
+    <br>
     <button style="background-color:blue;border-radius:12px;width:30%;color:white;" class="btn btn-primary" type="submit" id="save"  name="submit">CREATE</button>
 
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
       $(document).ready(function(){
     // Load Table Records
     function loadTable(){
       $.ajax({
-        url : "loadexam.php",
+        url : "load.php",
         type : "POST",
         success : function(data){
           $("#table-data").html(data);
@@ -144,42 +140,28 @@ for($i=0;$i<sizeof($degree);$i++){
       });
     }
     loadTable();
-
+     // Load Table Records on Page Load
+});
 
     $('#createclass').on('click',function(){
         $('#toCreate').css("display","block");
         $("#save").on('click',function(e){
             e.preventDefault();
-        let file1 = document.getElementById('pdf').files[0];
-        let date = $("#date").val();
+        let subject = $("#subject").val();
+        let name = $("#name").val();
         let degree = $("#degree").val();
         let branch = $("#branch").val();
         let sem = $("#sem").val();
-        var form_data = new FormData();
-        form_data.append("file",file1);
-        form_data.append("date",date);
-        form_data.append("degree",degree);
-        form_data.append("branch",branch);
-        form_data.append("sem",sem);
+        console.log(subject+name+degree+branch+sem);
        $.ajax({
-        url:"createexamtable.php",
+        url:"createclass.php",
         type:"POST",
-        data:form_data,
-        contentType:false,
-        cache:false,
-        processData:false,
+        data:{subject:subject,name:name,degree:degree,branch:branch,sem:sem},
         success: function(data){
             console.log(data);
-            loadTable();
         }
        })
     })
     });
-});
-</script>
-<script>
-function handleclick(name){
-  console.log(name);
-}
 </script>
 </html>

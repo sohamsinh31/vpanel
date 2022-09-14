@@ -4,6 +4,7 @@ session_start([
 ]);
 header('location:login.php');
 $con = mysqli_connect('localhost','root');
+$next = $_POST['next'];
 if($con){
     echo "connection was successfull";
 }
@@ -32,7 +33,9 @@ $result = mysqli_query($con,$q);
 $num = mysqli_num_rows($result);
 if($num == 1){
     $_SESSION['username'] = $name;
-    header('location:index');
+    if($next){
+      header('location:http://'.$_SERVER['SERVER_NAME'].$next.'');
+    }
     while($row = mysqli_fetch_array($result)){
       $_SESSION['id'] = $row['id'];
     }

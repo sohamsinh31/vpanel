@@ -6,6 +6,7 @@ if(!isset($_SESSION['id'])){
 else{
     header('location:index.php');
 }
+$next = $_GET['next'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,6 +43,7 @@ else{
                     <br>
                     <input style="width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="password" name="password">
 </div>
+<input type="hidden" name="next" value=<?php echo $next ?>>
 <br>
 <br>
 <span><a style="color:gold;" href="signup.php">Not logged in yet click to Sign up</a></span><br>

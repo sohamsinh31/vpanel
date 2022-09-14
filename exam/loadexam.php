@@ -5,10 +5,9 @@ include("../function.php");
 $q = "SELECT * FROM studentinfo WHERE id='$tid'";
 $r1 = mysqli_query($con,$q);
 while($roww=$r1->fetch_assoc()){
-    $branch = $roww['branch'];
+    $branch = $roww['branchid'];
     $sem = $roww['semester'];
-    $degree = $roww['degree'];
-$sql = "SELECT * FROM examtable WHERE degree = '$degree' AND sem = '$sem'";
+$sql = "SELECT DISTINCT t1.* FROM examtable as t1,branches as t2 WHERE t2.degree = (SELECT degree FROM branches WHERE id='$branch') AND t1.sem = '$sem' ORDER BY id";
 $result = mysqli_query($con, $sql) or die("SQL Query Failed.");
 $output = "";
 if(mysqli_num_rows($result) > 0 ){

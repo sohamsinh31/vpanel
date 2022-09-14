@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['id2'])){
-    header('location:login');
+  header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
 ?>
 <!DOCTYPE html>

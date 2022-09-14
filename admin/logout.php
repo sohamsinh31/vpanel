@@ -2,5 +2,5 @@
 session_start();
 unset($_SESSION['username']);
 session_destroy();
-header('location:login.php');
+header('location:login.php?next=/admin/class');
 ?>

@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION['id2'])){
+    header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
+}
 $con = mysqli_connect('localhost','root','');
 mysqli_select_db($con,'vpanel');
 if(isset($_POST['tid'])){

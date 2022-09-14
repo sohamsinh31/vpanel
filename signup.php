@@ -105,12 +105,6 @@ include('function.php');
                 array_push($branchesn,$r['id']);
             }
             ?>
-            <!-- <label>Choose degree:</label>  
-<select name="degree">
-    <option value="BE/BTECH">B.E/B.TECH</option>
-    <option value="BSC">B.Sc</option>
-    <option value="DIPLOMA">Diploma</option>
-    </select> -->
     <label>Choose branch:</label>  
     <?php
 echo '<select class="form-control selectpicker"  name="branch" data-live-search="true">';
