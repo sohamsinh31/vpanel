@@ -19,9 +19,9 @@ $endd = $_POST['endd'];
 $end1 = explode(" ",$endd)[0];
 $end2 = explode(" ",$startt)[1];
 include("db-connect.php");
-$q = "SELECT * FROM studentinfo WHERE branch = '$branch' AND semester = '$sem' AND degree = '$degree'ORDER BY enrollment ASC";
+$q = "SELECT * FROM studentinfo WHERE branchid = '$branch' AND semester = '$sem' ORDER BY enrollment ASC";
 $result = $conn->query($q);
-$num = $result->num_rows;
+$num = mysqli_num_rows($result);
 $output = '<h4>Your current class is:'.$class.' and subject is:'.$subject.'</h4>
 <form id="form1" method="POST" enctype="multipart/form-data" action="savesched">';
 if($num>0){

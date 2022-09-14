@@ -43,7 +43,7 @@ for($i=0;$i<$total;$i++){
     $q = "INSERT INTO timetable (`teacherid`,`branch`,`subject`,`sem`,`degree`,`class`,`starttime`,`endtime`) VALUES ('$id','$branch','$subj','$sem','$degree','$class','$the_time','$the_time2')";
     #$con->query($q) or die(mysqli_error($con));
     if($con->query($q)){
-        header('location:tables');
+        header('location:insert');
     }
     else{
         echo "ERROR";

@@ -55,10 +55,25 @@ if(!isset($_SESSION['id2'])){
             background-color:#ffffff10;
             backdrop-filter: blur(12px);
         }
+        #att{
+          width:100%;
+            border:2px solid white;
+            border-radius:15px;
+            font-size:100px;
+            text-align:center;
+            background-color:#ffffff10;
+            backdrop-filter: blur(12px);
+        }
     </style>
 </head>
 <body>
-
+<button>
+  <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/schedule/index'?>">
+  <div id="att">
+  Attandance
+      </div>
+</button>
+      </a>
     <table id="main" border="0" cellspacing="0">
     <tr>
       <td id="header">

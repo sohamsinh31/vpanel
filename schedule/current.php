@@ -1,5 +1,5 @@
 <?php
-if($_SERVER['REQUEST_METHOD'] !='POST'){
+if($_SERVER['REQUEST_METHOD'] !='GET'){
     echo "<script> alert('Error: No data to save.'); location.replace('./index') </script>";
     exit;
 }

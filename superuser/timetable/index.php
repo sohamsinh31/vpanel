@@ -124,7 +124,7 @@ body{
             <td><input type='text' name='sub[]' required/></td>
             <td>
             <select name="branch[]">
-            <option value="CSE">Computer science and engineering</option>
+            <option value="CS">Computer science and engineering</option>
             <option value="ITE">Information technology and engineering</option>
             <option value="IT">Information technology</option>
             <option value="CH">Chemical engineering</option>

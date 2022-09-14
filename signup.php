@@ -41,53 +41,53 @@ include('function.php');
                 <div class="form-groop">
                     <label>Fullname(as per any 10th/12th marksheet):</label>
                     <br>
-                    <input style="width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" class="form-control">
+                    <input style="color:white;width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" class="form-control">
 <br>
     <br>
                     <label>DateOfBirth:</label><br>
-                    <input style="width:40%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="date" name="date" class="form-control">
+                    <input style="color:white;width:40%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="date" name="date" class="form-control">
                     <label>Age:</label>
-                    <input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="age" class="form-control">
+                    <input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="age" class="form-control">
                     <br>
-                    <label>Gender:</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="gender" value="male"><label>Male</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="gender" value="female"><label>Female</label>
+                    <label>Gender:</label><input style="color:white;width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="gender" value="male"><label>Male</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="gender" value="female"><label>Female</label>
                     <br>
-                    <label>Address:</label><input style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="address" class="form-control">
-                    <label>Pincode:</label><input type="number" style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="pincode" maxlength="6">
-                    <label>Mobile:</label><input type="tel" style="width:40%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="mobile">
+                    <label>Address:</label><input style="color:white;width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="address" class="form-control">
+                    <label>Pincode:</label><input type="number" style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="pincode" maxlength="6">
+                    <label>Mobile:</label><input type="tel" style="color:white;width:40%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="mobile">
 <br>
-<label>Email:</label><input type="email" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="email">
+<label>Email:</label><input type="email" style="color:white;width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="email">
                     <br>
-                    <label>Choose password:</label><input type="password" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="password">
+                    <label>Choose password:</label><input type="password" style="color:white;width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="password">
                     <br><label>Students passport size photo:</label>
                     <input type="file" name="fileToUpload" id="fileToUpload">
                 <hr>
                 <label style="color:gold;">Parents/Guardian's information:</label>
             <hr>    
             <label>Full name of father:</label>
-            <input style="width:90%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="fathername" class="form-control">
+            <input style="color:white;width:90%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="fathername" class="form-control">
             <br>
-            <label>Proffesion:</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="buissness"><label>Buissness</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="job"><label>Job</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="other"><label>Other</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="teacher"><label>Teacher</label>
+            <label>Proffesion:</label><input style="color:white;width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="buissness"><label>Buissness</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="job"><label>Job</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="other"><label>Other</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_father" value="teacher"><label>Teacher</label>
             <br>
-            <label>Father's mobile</label><input type="tel" style="width:30%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="father_mobile">
+            <label>Father's mobile</label><input type="tel" style="color:white;width:30%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="father_mobile">
             <br>
             <label>Full name of mother:</label>
-            <input style="width:90%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="mothername" class="form-control">
+            <input style="color:white;width:90%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="mothername" class="form-control">
             <br>
-            <label>Proffesion:</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="buissness"><label>Buissness</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="job"><label>Job</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="other"><label>Other</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="teacher"><label>Teacher</label>
+            <label>Proffesion:</label><input style="color:white;width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="buissness"><label>Buissness</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="job"><label>Job</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="other"><label>Other</label><input style="width:10%;height:20px;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="radio" name="proffesion_mother" value="teacher"><label>Teacher</label>
             <br>
-            <label>Mother's mobile</label><input type="tel" style="width:30%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="mother_mobile">
+            <label>Mother's mobile</label><input type="tel" style="color:white;width:30%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="mother_mobile">
 
             <hr>  
             <label style="color:gold;">12th information</label> 
             <hr>
-            <label>Physics theorey:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_theorey" class="form-control"><label>Physics practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_practical" class="form-control">
+            <label>Physics theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_theorey" class="form-control"><label>Physics practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_practical" class="form-control">
             <br>
-            <label>maths theorey:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="maths_theorey" class="form-control"><label>English:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="english" class="form-control">
+            <label>maths theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="maths_theorey" class="form-control"><label>English:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="english" class="form-control">
 
             <br>
-            <label>chemistry theorey:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_theorey" class="form-control"><label>Chemistry practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_practical" class="form-control">
+            <label>chemistry theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_theorey" class="form-control"><label>Chemistry practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_practical" class="form-control">
             <br>
-            <label>Total precentage(as per marksheet):</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="percentage" class="form-control">
+            <label>Total precentage(as per marksheet):</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="percentage" class="form-control">
             <br>
             <hr>
             <label style="color:gold;">For collage information</label>
