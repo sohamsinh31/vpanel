@@ -8,8 +8,12 @@ $(function() {
             if(row.description.indexOf(enrollment)>=0){
             events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
             }
-            else{
+            else if(row.absent.indexOf(enrollment)>=0){
                 events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'red',color:'red',rendering: 'background' });
+            }
+            else{
+                events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'gray',color:'red',rendering: 'background' });
+
             }
         })
     }

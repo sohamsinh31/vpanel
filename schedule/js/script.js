@@ -60,7 +60,9 @@
             var id = $(this).attr('data-id')
             if (!!scheds[id]) {
                 var _form = $('#schedule-form')
-                console.log(String(scheds[id].start_datetime), String(scheds[id].start_datetime).replace(" ", "\\t"),scheds[id].absent)
+                let startt = String(scheds[id].start_datetime).replace(" ", "T").slice(0,-3)
+                let endd = String(scheds[id].end_datetime).replace(" ", "T").slice(0,-3)
+                console.log(String(scheds[id].end_datetime).replace(" ", "T"),startt)
                 _form.find('[name="id"]').val(id)
                 _form.find('[name="title"]').val(scheds[id].title)
                 _form.find('[name="degree2"]').val(scheds[id].degree)
@@ -68,8 +70,8 @@
                 _form.find('[name="semester2"]').val(scheds[id].semester)
                 _form.find('[name="description"]').val(scheds[id].description)
                 _form.find('[name="absent"]').val(scheds[id].absent)
-                _form.find('[name="start_datetime"]').val(String(scheds[id].start_datetime).replace(" ", "T"))
-                _form.find('[name="end_datetime"]').val(String(scheds[id].end_datetime).replace(" ", "T"))
+                _form.find('[name="start_datetime"]').val(startt)
+                _form.find('[name="end_datetime"]').val(endd)
                 $('#event-details-modal').modal('hide')
                 _form.find('[name="title"]').focus()
             } else {
