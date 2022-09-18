@@ -77,6 +77,7 @@ $dbname   ='vpanel';
     <br>
     <br>
     <br>
+
     <div id="loadbranch">
 </div>
     <div id="custom">
@@ -214,7 +215,7 @@ $dbname   ='vpanel';
 
 <?php 
 $sched_res = [];
-if($_POST['semester']){
+if(isset($_POST['semester'])){
 $tid = $_SESSION['id2'];
 $branch = $_POST['branch'];
 $sem = $_POST['semester'];

@@ -73,7 +73,7 @@ body{
 </div>
 <div class="scrolll">
 <form method='post' action='insert' enctype='multipart/form-data'>
-        <table class="table table-bordered text-dark" border='1' width='25%'>
+        <table id="addMe" class="table table-bordered text-dark" border='1' width='25%'>
             <tr class="success text-white">
             <th>Starttime</th>
             <th>Endtime</th>
@@ -82,70 +82,55 @@ body{
             <th>Subject</th>
             <th>Branch</th>
             <th>Sem</th>
-            <th>Degree</th>
             <th></th>
             </tr>
 <!--  $output .= " -->
-            <tr id='111'>
+            <tr>
             <td><input type='time' value="16:32:55"  name='start[]' required/></td>
             <td><input type='time' value="17:32:55"  name='end[]' required/></td>
             <td><input type='text' name='class[]'required/></td>
             <td><input type='text' name='id[]' required/></td>
             <td><input type='text' name='sub[]' required/></td>
             <td>
-            <select name="branch[]">
-            <option value="CSE">Computer science and engineering</option>
-            <option value="ITE">Information technology and engineering</option>
-            <option value="IT">Information technology</option>
-            <option value="CH">Chemical engineering</option>
-            <option value="CV">Civil engineering</option>
-            <option value="MH">Mechanical engineering</option>
-            <option value="CE">Computer engineering</option>
-            <option value="PE">Pharmasutical engineering</option>
-            </select>
+            <?php
+            $q="SELECT * FROM `branches`";
+            $result=$con->query($q);
+            $row = $result->fetch_all(MYSQLI_ASSOC);
+            $branches=array();
+            $branchesn=array();
+            $degree = array();
+            foreach($row as $r){
+                array_push($degree,$r['degree']);
+                 array_push($branches,$r['name']);
+                array_push($branchesn,$r['id']);
+            }
+$outputt= '<select class="form-control selectpicker"  name="branch[]" data-live-search="true">';
+for($i=0;$i<sizeof($branches);$i++){
+    $outputt.= '<option value="'.$branchesn[$i].'">'.$degree[$i].'-'.$branches[$i].'</option>';
+}
+
+    $outputt.= '</select>';
+    echo $outputt;
+    ?>
             </td>
             <td><input type='text' name='sem[]'required/></td>
-            <td>
-            <select name="degree[]">
-            <option value="BE/BTECH">B.E/B.TECH</option>
-            <option value="BSC">B.Sc</option>
-            <option value="DIPLOMA">Diploma</option>
-            </select>
-            </td>
-            <td><button style="background-color:red;color:white;" onclick="deletefun(111)">Delete</button></td>
+            <td><button style="background-color:red;color:white;" type="button" onclick="deletefun(1)">Delete</button></td>
             </tr>
             
- <!-- $output .= " -->
-            <tr id='222'>
+            <tr>
             <td><input type='time' value="16:32:55" name='start[]'required/></td>
             <td><input type='time' value="17:32:55" name='end[]'required/></td>
             <td><input type='text' name='class[]'required/></td>
             <td><input type='text' name='id[]' required/></td>
             <td><input type='text' name='sub[]' required/></td>
             <td>
-            <select name="branch[]">
-            <option value="CS">Computer science and engineering</option>
-            <option value="ITE">Information technology and engineering</option>
-            <option value="IT">Information technology</option>
-            <option value="CH">Chemical engineering</option>
-            <option value="CV">Civil engineering</option>
-            <option value="MH">Mechanical engineering</option>
-            <option value="CE">Computer engineering</option>
-            <option value="PE">Pharmasutical engineering</option>
-            </select>
+            <?php
+            echo $outputt;
+    ?>
             </td>
             <td><input type='text' name='sem[]'required/></td>
-            <td>
-            <select name="degree[]">
-            <option value="BE/BTECH">B.E/B.TECH</option>
-            <option value="BSC">B.Sc</option>
-            <option value="DIPLOMA">Diploma</option>
-            </select>
-            </td>
-            <td><button style="background-color:red;color:white;" onclick="deletefun(222)">Delete</button></td>
+            <td><button style="background-color:red;color:white;" type="button" onclick="deletefun(2)">Delete</button></td>
             </tr>
-            </table>
-            <table class="table table-bordered" width="25%" border='1' id='table'>
             </table>
             <button class="btn btn-primary" id='clickme'>Add</button>
             <button class="btn btn-success" type='submit'>Submit</button>
@@ -155,69 +140,42 @@ body{
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    let i = 0;
-    let html = ``;
+    let i = 3;
+
     $("#clickme").on("click",function(e){ 
-        let data =`
-        <tr id='${i}'>
-            <td><input type='time' value="16:32:55"  name='start[]' required/></td>
-            <td><input type='time' value="17:32:55"  name='end[]'required/></td>
-            <td><input type='text' name='class[]'required/></td>
-            <td><input type='text' name='id[]' required/></td>
-            <td><input type='text' name='sub[]' required/></td>
-            <td>
-            <select name="branch[]">
-            <option value="CSE">Computer science and engineering</option>
-            <option value="ITE">Information technology and engineering</option>
-            <option value="IT">Information technology</option>
-            <option value="CH">Chemical engineering</option>
-            <option value="CV">Civil engineering</option>
-            <option value="MH">Mechanical engineering</option>
-            <option value="CE">Computer engineering</option>
-            <option value="PE">Pharmasutical engineering</option>
-            </select>
-            </td>
-            <td><input type='text' name='sem[]'required/></td>
-            <td>
-            <select name="degree[]">
-            <option value="BE/BTECH">B.E/B.TECH</option>
-            <option value="BSC">B.Sc</option>
-            <option value="DIPLOMA">Diploma</option>
-            </select>
-            </td>
-            <td><button style="background-color:red;color:white;" onclick='deletefun(${i})'>Delete</button></td>
-            </tr>
-            `;
-        html+=data;
-        i++;
-        $("#table").html(
-            html
-        )
-    e.preventDefault();
+      e.preventDefault();
+      let table1 = document.getElementById("addMe");
+      let row = table1.insertRow(3);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      let cell3 = row.insertCell(2);
+      let cell4 = row.insertCell(3);
+      let cell5 = row.insertCell(4);
+      let cell6 = row.insertCell(5);
+      let cell7 = row.insertCell(6);
+      let cell8 = row.insertCell(7);
+
+      cell1.innerHTML=`<input type='time' value="16:32:55"  name='start[]' required/>`;
+      cell2.innerHTML=`<input type='time' value="17:32:55" name='end[]'required/>`;
+      cell3.innerHTML=`<input type='text' name='class[]'required/>`;
+      cell4.innerHTML=`<input type='text' name='id[]' required/>`;
+      cell5.innerHTML=`<input type='text' name='sub[]' required/>`;
+      cell6.innerHTML='<?php echo $outputt ?>';
+      cell7.innerHTML=`<input type='text' name='sem[]'required/>`;
+      cell8.innerHTML=`<button style="background-color:red;color:white;" onclick="deletefun(${i})">Delete</button>`;
+
+      i++;
     
     });
-$("#delete").on("click",function(e){
-        let i = 0;
-        $("#table").html(
-            data
-        )
-        i++;
-        e.preventDefault();
-    });
-function deletefun(dt){
-    document.getElementById(`${dt}`).innerHTML="";
-    // i = dt-1;
-    // console.log(i)
-}
-// var timepicker = new TimePicker('time', {
-//   lang: 'en',
-//   theme: 'dark'
-// });
-// timepicker.on('change', function(evt) {
+//     $("#deletefun").on("click",function(e){
+//   e.preventDefault();
+//   console.log("hi")
+//   document.getElementById("addMe").deleteRow(1);
+// })
+function deletefun(e){
   
-//   var value = (evt.hour || '00') + ':' + (evt.minute || '00');
-//   evt.element.value = value;
+  document.getElementById("addMe").deleteRow(e);
+}
 
-// });
 </script>
 </html>

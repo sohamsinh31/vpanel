@@ -11,7 +11,7 @@ $tid = $_SESSION['id2'];
 date_default_timezone_set('Asia/Calcutta');
 $con = mysqli_connect('localhost','root','');
 mysqli_select_db($con,'vpanel');
-$date = date('h:i:s',time());
+$date = date('H:i:s',time());
 $q = "SELECT * FROM timetable WHERE teacherid='$tid'";
 $json = array();
 $result = $con->query($q);
@@ -36,10 +36,8 @@ while($row = $result->fetch_assoc()){
         // echo $endd;
         $row+= $arr;
         $json[] = $row;
+       
     }
-    // else{
-    //     echo "No data aviable";
-    // }
 }
  echo json_encode($json);
 }
