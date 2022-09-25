@@ -1,13 +1,8 @@
 <?php
-function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-}
-echo generateRandomString();
+$con = mysqli_connect('localhost','root','','vpanel');
+    $q = "SELECT * FROM `studentinfo` where email = 'sohamb2019@gmail.com' && password = '1234567'";
+    $result = $con->query($q);
+    $row = $result->fetch_all(MYSQLI_ASSOC);
+    echo $row[0]['id'];
     ?>
 

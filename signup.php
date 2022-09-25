@@ -80,12 +80,12 @@ include('function.php');
             <hr>  
             <label style="color:gold;">12th information</label> 
             <hr>
-            <label>Physics theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_theorey" class="form-control"><label>Physics practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_practical" class="form-control">
+            <label>Physics theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_theorey" class="form-control"><label>Physics practical:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="physics_practical" class="form-control">
             <br>
-            <label>maths theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="maths_theorey" class="form-control"><label>English:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="english" class="form-control">
+            <label>maths theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="maths_theorey" class="form-control"><label>English:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="english" class="form-control">
 
             <br>
-            <label>chemistry theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_theorey" class="form-control"><label>Chemistry practical:</label><input style="width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_practical" class="form-control">
+            <label>chemistry theorey:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_theorey" class="form-control"><label>Chemistry practical:</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="chemistry_practical" class="form-control">
             <br>
             <label>Total precentage(as per marksheet):</label><input style="color:white;width:20%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="number" name="percentage" class="form-control">
             <br>

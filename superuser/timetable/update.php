@@ -6,6 +6,23 @@ if(!isset($_SESSION['id2'])){
 include('../header.php');
 $con = mysqli_connect('localhost','root','');
 mysqli_select_db($con,'vpanel');
+$q="SELECT * FROM `branches`";
+$result=$con->query($q);
+$row = $result->fetch_all(MYSQLI_ASSOC);
+$branches=array();
+$branchesn=array();
+$degree = array();
+foreach($row as $r){
+    array_push($degree,$r['degree']);
+     array_push($branches,$r['name']);
+    array_push($branchesn,$r['id']);
+}
+$outputt= '<select class="form-control selectpicker"  name="branch[]" data-live-search="true">';
+for($i=0;$i<sizeof($branches);$i++){
+$outputt.= '<option value="'.$branchesn[$i].'">'.$degree[$i].'-'.$branches[$i].'</option>';
+}
+
+$outputt.= '</select>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +98,6 @@ echo $output1;
             <th>Subject</th>
             <th>Branch</th>
             <th>Sem</th>
-            <th>Degree</th>
             <th></th>
             <th></th>
             </tr>
@@ -97,25 +113,10 @@ while($row = $result->fetch_assoc()){
             <td><input type='text' value='".$row['class']."' name='class'required/></td>
             <td><input type='text' value='".$row['teacherid']."'  name='id' required/></td>
             <td><input type='text' value='".$row['subject']."'  name='sub' required/></td>
-            <td>
-            <select value='".$row['branch']."'  name='branch'>
-            <option value='CS'>Computer science and engineering</option>
-            <option value='ITE'>Information technology and engineering</option>
-            <option value='IT'>Information technology</option>
-            <option value='CH'>Chemical engineering</option>
-            <option value='CV'>Civil engineering</option>
-            <option value='MH'>Mechanical engineering</option>
-            <option value='CE'>Computer engineering</option>
-            <option value='PE'>Pharmasutical engineering</option>
-            </select>
+            <td>"
+          . $outputt."
             </td>
             <td><input value='".$row['sem']."'  type='text' name='sem'required/></td>
-            <td>
-            <select value='".$row['degree']."'  name='degree'>
-            <option value='BE/BTECH'>B.E/B.TECH</option>
-            <option value='BSC'>B.Sc</option>
-            <option value='DIPLOMA'>Diploma</option>
-            </select>
             <td><input type='hidden' value='".$row['id']."' name='tid'><button id='updatet' class='btn btn-success btn-sm'>Update</button></td>
             </td>
             <td><button class='btn btn-danger btn-sm' data-id='".$row['id']."' id='deletefun'>Delete</button></td>

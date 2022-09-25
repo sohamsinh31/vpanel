@@ -51,8 +51,11 @@ else {
     else{
         $qy = "INSERT into `studentinfo`(studentname,dob,age,gender,address,pincode,mobile,email,password,photourl,fathername,proffesionf,mobilef,mothername,proffesionm,mobilem,physicst,physicsp,chemistryt,chemistryp,mathst,english,percentage,branchid,year,semester) values ('$name','$date','$age','$gender','$address','$pincode','$mobile','$email','$password','$target_file','$fathername','$proffessionf','$mobilef','$mothername','$proffessionm','$mobilem','$physicst','$physicsp','$chemistryt','$chemistryp','$maths','$english','$percentage','$branch','$year','$semester')";
         mysqli_query($con,$qy);
-        userimage();
-        enrollment($branch,$degree);
+        $result2 = mysqli_query($con,$q);
+        $row = $result2->fetch_all(MYSQLI_ASSOC);
+        $sid = $row[0]['id'];
+        userimage($sid);
+        enrollment($branch);
         header('location:login.php');
     }
 }

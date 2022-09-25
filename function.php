@@ -3,21 +3,19 @@
 		// $id = $_SESSION['id'];
 		$con = mysqli_connect('localhost','root','','vpanel');
 		// mysqli_select_db($con,'vpanel');
-function userimage() {
+function userimage($sid) {
 	$add = $_POST['user'];
     $add2 = explode(" ",$add);
 	$add3 = generateRandomString();
-	mkdir('students/'.$add2[0].'');
-			$target_dir = "students/".$add2[0]."/";
+	mkdir('students/'.$sid);
+			$target_dir = "students/".$sid."/";
 			$uploadOk = 1;
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);			
 			$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 			$i=0;
-			while(file_exists($target_file)) {
-				$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]).$i;
+			if(file_exists($target_file)) {
+				$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]).$add3;
 				$i++;			
-			//   echo "Sorry, file already exists.";
-			//   $uploadOk = 0;
 			}
 			
 			if($imageFileType != "png" && $imageFileType != "gif" && $imageFileType != "jpeg"
@@ -52,17 +50,23 @@ function userimage() {
 					}
 				}
 		}
-		function enrollment($branch,$degree){
+		function enrollment($branch){
 			$con = mysqli_connect("localhost","root","","vpanel");
         	//$degree = "BE/BTECH";
-			$q2 = " SELECT * FROM `studentinfo` WHERE branch = '$branch' AND degree='$degree' ORDER BY studentname ASC";
+			$q2 = " SELECT * FROM `studentinfo` WHERE branchid = '$branch' ORDER BY studentname ASC";
 			$result2 = mysqli_query($con,$q2);
 			$i = 001;
 			$enrollment = "";
+			$q = "SELECT DISTINCT degree FROM `branches` WHERE id='$branch'";
+			$result = $con->query($q);
+			$row = $result->fetch_all(MYSQLI_ASSOC);
+			echo print_r($row);
+			echo $row[0]['degree'];
 			while($test2 = mysqli_fetch_assoc($result2)){
+				$degree = $row[0]['degree'];
 				if($degree=='BE/BTECH'){
 				echo "<br>";
-				$enrollment = $test2['year'].'SE02'.$test2['branch'].str_pad($i,3,'0',STR_PAD_LEFT);
+				$enrollment = $test2['year'].'SE02'.$test2['branchid'].str_pad($i,3,'0',STR_PAD_LEFT);
 				echo $enrollment;
 				echo "<br>";
 				}
@@ -85,7 +89,7 @@ function userimage() {
 				$i++;
 			}
 		}
-		function generateRandomString($length = 10) {
+		function generateRandomString($length = 4) {
 			$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			$charactersLength = strlen($characters);
 			$randomString = '';

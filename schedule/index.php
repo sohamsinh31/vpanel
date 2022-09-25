@@ -2,7 +2,7 @@
 <?php require_once('db-connect.php');
 session_start(); 
 if(!$_SESSION['id2']){
-    header('location:../admin/login?next=schedule/index');
+    header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
 $host     = 'localhost';
 $username = 'root';

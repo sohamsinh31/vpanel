@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(!isset($_SESSION['id2'])){
     header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
@@ -19,7 +20,7 @@ if(isset($_POST['tid'])){
     echo $tid.$the_time2;
     $q = "UPDATE timetable SET teacherid='$id',branch='$branch',subject='$subj',sem='$sem',class='$class',starttime='$the_time',endtime='$the_time2' WHERE id='$tid'";
     if($con->query($q)){
-        header('location:tables');
+        header('location:http://'.$_SERVER['SERVER_NAME'].'/superuser/timetable/update');
     }
     else{
         echo "ERROR";
