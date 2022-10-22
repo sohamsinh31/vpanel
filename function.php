@@ -52,7 +52,6 @@ function userimage($sid) {
 		}
 		function enrollment($branch){
 			$con = mysqli_connect("localhost","root","","vpanel");
-        	//$degree = "BE/BTECH";
 			$q2 = " SELECT * FROM `studentinfo` WHERE branchid = '$branch' ORDER BY studentname ASC";
 			$result2 = mysqli_query($con,$q2);
 			$i = 001;
@@ -60,8 +59,6 @@ function userimage($sid) {
 			$q = "SELECT DISTINCT degree FROM `branches` WHERE id='$branch'";
 			$result = $con->query($q);
 			$row = $result->fetch_all(MYSQLI_ASSOC);
-			echo print_r($row);
-			echo $row[0]['degree'];
 			while($test2 = mysqli_fetch_assoc($result2)){
 				$degree = $row[0]['degree'];
 				if($degree=='BE/BTECH'){
@@ -79,7 +76,6 @@ function userimage($sid) {
 				}
 				$sid = $test2['id'];
 				$q = "UPDATE studentinfo SET enrollment = '$enrollment' WHERE id = '$sid'";
-				// $result =mysqli_query($con,$q)
 				if(mysqli_query($con,$q)){
 				echo "success";
 				}
