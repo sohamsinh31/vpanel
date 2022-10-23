@@ -9,7 +9,7 @@ if(!isset($_SESSION['id2'])){
 }
 $tid = $_SESSION['id2'];
 date_default_timezone_set('Asia/Calcutta');
-$con = mysqli_connect('localhost','root','');
+include('../function.php');
 mysqli_select_db($con,'vpanel');
 $date = date('H:i:s',time());
 $q = "SELECT * FROM timetable WHERE teacherid='$tid'";

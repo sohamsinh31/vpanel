@@ -3,7 +3,7 @@ $classid = $_POST['classid'];
 $file = $_POST['file'];
 $type = $_POST['type'];
 $title = $_POST['name2'];
-$con = mysqli_connect('localhost','root','','vpanel');
+include('../function.php');
 if($type=='video' || $type=='image' || $type=='pdf'){
     if($_FILES['file']['name'] != ''){
         $test = explode('.', $_FILES['file']['name']);

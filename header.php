@@ -328,8 +328,7 @@ Sidebar
     <div class="right">
         <?php 
 			$id = $_SESSION['id'];
-			$con = mysqli_connect('localhost','root');
-			mysqli_select_db($con,'vpanel');
+            include('function.php');
 				$q = "SELECT * FROM `studentinfo` where id = '$id'";
 				$result = mysqli_query($con,$q);
 				$num = mysqli_num_rows($result);

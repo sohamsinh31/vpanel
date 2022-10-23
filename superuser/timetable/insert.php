@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['id2'])){
     header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
-$con = mysqli_connect('localhost','root','');
+include('../../function.php');
 mysqli_select_db($con,'vpanel');
 if(isset($_POST['tid'])){
     $startt = $_POST['start'];
@@ -17,7 +17,7 @@ if(isset($_POST['tid'])){
     $subj = $_POST['sub'];
     $the_time = date('H:i:s', strtotime($startt));
     $the_time2 = date('H:i:s', strtotime($end));
-    echo $tid.$the_time2;
+    echo $branch;
     $q = "UPDATE timetable SET teacherid='$id',branch='$branch',subject='$subj',sem='$sem',class='$class',starttime='$the_time',endtime='$the_time2' WHERE id='$tid'";
     if($con->query($q)){
         header('location:http://'.$_SERVER['SERVER_NAME'].'/superuser/timetable/update');
@@ -40,7 +40,7 @@ for($i=0;$i<$total;$i++){
     $subj = $_POST['sub'][$i];
     $the_time = date('H:i:s', strtotime($startt));
     $the_time2 = date('H:i:s', strtotime($end));
-    echo $the_time.$the_time2;
+    echo $branch;
     $q = "INSERT INTO timetable (`teacherid`,`branch`,`subject`,`sem`,`class`,`starttime`,`endtime`) VALUES ('$id','$branch','$subj','$sem','$class','$the_time','$the_time2')";
     #$con->query($q) or die(mysqli_error($con));
     if($con->query($q)){

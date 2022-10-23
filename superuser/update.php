@@ -1,5 +1,5 @@
 <?php
-include('function.php');
+include('../function.php');
 $required = array('studentname','age','pin','mob','email','fname','fmobile','mmobile','mname','dob');
 $error = false;
 foreach($required as $field){

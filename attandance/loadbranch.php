@@ -2,9 +2,9 @@
 $branch = $_POST['branch'];
 $sem = $_POST['sem'];
 $degree = $_POST['degree'];
-include("db-connect.php");
+include("../function.php");
 $q = "SELECT * FROM studentinfo WHERE branch = '$branch' AND semester = '$sem' AND degree = '$degree'ORDER BY enrollment ASC";
-$result = $conn->query($q);
+$result = $con->query($q);
 $num = $result->num_rows;
 $output = '<form id="form1" type="POST" name="form1">';
 if($num>0){

@@ -1,11 +1,11 @@
-
 <?php require_once('db-connect.php');
 session_start(); 
 if(!isset($_SESSION['id'])){
     header('location:http://'.$_SERVER['SERVER_NAME'].'/login?next='.$_SERVER['REQUEST_URI']);
   }
 $sid = $_SESSION['id'];
-$con = mysqli_connect("localhost","root","","vpanel");
+include("../function.php");
+// $con = mysqli_connect("localhost","root","","vpanel");
 $qq="SELECT * FROM `studentinfo` WHERE id='{$sid}'";
 $rrr=mysqli_query($con,$qq);
 $branchh='';

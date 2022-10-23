@@ -1,8 +1,8 @@
 <?php 
-require_once('db-connect.php');
+include('../function.php');
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     echo "<script> alert('Error: No data to save.'); location.replace('./index') </script>";
-    $conn->close();
+    $con->close();
     exit;
 }
 extract($_POST);
@@ -13,15 +13,15 @@ if(empty($id)){
 }else{
     $sql = "UPDATE `schedule_list` set `title` = '{$title}', `description` = '{$description}',`absent`='{$absent}', `start_datetime` = '{$start_datetime}', `end_datetime` = '{$end_datetime}' where `id` = '{$id}'";
 }
-$save = $conn->query($sql);
+$save = $con->query($sql);
 if($save){
     echo "<script> alert('Schedule Successfully Saved.'); location.replace('./index') </script>";
 }else{
     echo "<pre>";
     echo "An Error occured.<br>";
-    echo "Error: ".$conn->error."<br>";
+    echo "Error: ".$con->error."<br>";
     echo "SQL: ".$sql."<br>";
     echo "</pre>";
 }
-$conn->close();
+$con->close();
 ?>

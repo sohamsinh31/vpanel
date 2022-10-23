@@ -18,9 +18,9 @@ $start2 = explode(" ",$startt)[1];
 $endd = $_POST['endd'];
 $end1 = explode(" ",$endd)[0];
 $end2 = explode(" ",$startt)[1];
-include("db-connect.php");
+include("../function.php");
 $q = "SELECT * FROM studentinfo WHERE branchid = '$branch' AND semester = '$sem' ORDER BY enrollment ASC";
-$result = $conn->query($q);
+$result = $con->query($q);
 $num = mysqli_num_rows($result);
 $output = '<h4>Your current class is:'.$class.' and subject is:'.$subject.'</h4>
 <form id="form1" method="POST" enctype="multipart/form-data" action="savesched">';

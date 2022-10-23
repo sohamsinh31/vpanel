@@ -1,8 +1,8 @@
 <?php 
-require_once('db-connect.php');
+include('../function.php');
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     echo "<script> alert('Error: No data to save.'); location.replace('./index') </script>";
-    $conn->close();
+    $con->close();
     exit;
 }
 if(isset($_POST['present'])){
@@ -33,15 +33,15 @@ $degree = $_POST['degree'];
 $sub = $_POST['sub'];
 echo $startt."<br>".$endd;
 $sql = "INSERT INTO `schedule_list` (`title`,`description`,`absent`,`degree`,`branch`,`semester`,`start_datetime`,`end_datetime`) VALUES ('$sub','$present','$absent','$degree','$branch','$sem','$startt','$endd')";
-$save = $conn->query($sql);
+$save = $con->query($sql);
 if($save){
     echo "<script> alert('Schedule Successfully Saved.'); location.replace('./index') </script>";
 }else{
     echo "<pre>";
     echo "An Error occured.<br>";
-    echo "Error: ".$conn->error."<br>";
+    echo "Error: ".$con->error."<br>";
     echo "SQL: ".$sql."<br>";
     echo "</pre>";
 }
-$conn->close();
+$con->close();
 ?>

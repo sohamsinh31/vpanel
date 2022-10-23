@@ -5,7 +5,8 @@ session_start([
 $next = $_POST['next'];
 echo $next;
 // header('location:login.php');
-$con = mysqli_connect('localhost','root');
+include('../function.php');
+// $con = mysqli_connect('localhost','root');
 if($con){
     echo "connection was successfull";
 }

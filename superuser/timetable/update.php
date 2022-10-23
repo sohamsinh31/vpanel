@@ -14,15 +14,16 @@ $branchesn=array();
 $degree = array();
 foreach($row as $r){
     array_push($degree,$r['degree']);
-     array_push($branches,$r['name']);
+    array_push($branches,$r['name']);
     array_push($branchesn,$r['id']);
 }
-$outputt= '<select class="form-control selectpicker"  name="branch[]" data-live-search="true">';
+$outputt= '<select class="form-control selectpicker"  name="branch" data-live-search="true">';
 for($i=0;$i<sizeof($branches);$i++){
 $outputt.= '<option value="'.$branchesn[$i].'">'.$degree[$i].'-'.$branches[$i].'</option>';
 }
 
 $outputt.= '</select>';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

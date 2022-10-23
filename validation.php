@@ -3,7 +3,7 @@ session_start([
   'cookie_lifetime' => 86400,
 ]);
 header('location:login.php');
-$con = mysqli_connect('localhost','root');
+include('function.php');
 $next = $_POST['next'];
 if($con){
     echo "connection was successfull";

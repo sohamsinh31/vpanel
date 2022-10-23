@@ -4,8 +4,7 @@ if(!isset($_SESSION['id2'])){
     header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
 include('../header.php');
-$con = mysqli_connect('localhost','root','');
-mysqli_select_db($con,'vpanel');
+include('../../function.php');
 $query = "SELECT * FROM teacher";
 $result = $con->query($query);
 $output1 = '

@@ -1,17 +1,8 @@
-
 <?php require_once('db-connect.php');
 session_start(); 
 if(!$_SESSION['id2']){
     header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
 }
-$host     = 'localhost';
-$username = 'root';
-$password = '';
-$dbname   ='vpanel';
-
-// else{
-//     header('location:index');
-// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -221,10 +212,10 @@ $branch = $_POST['branch'];
 $sem = $_POST['semester'];
 $deg = $_POST['degree'];
 $q = "SELECT * FROM timetable WHERE teacherid = '$tid' AND branch = '$branch' AND sem = '$sem' AND degree = '$deg'";
-$result = $conn->query($q);
+$result = $con->query($q);
 foreach ($result->fetch_all(MYSQLI_ASSOC) as $val){
     $sub = $val['subject'];
-$schedules = $conn->query("SELECT * FROM `schedule_list` WHERE title = '$sub'");
+$schedules = $con->query("SELECT * FROM `schedule_list` WHERE title = '$sub'");
 foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
     $row['sdate'] = date("F d, Y h:i A",strtotime($row['start_datetime']));
     $row['edate'] = date("F d, Y h:i A",strtotime($row['end_datetime']));
@@ -234,7 +225,7 @@ foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
 }
 ?>
 <!-- <?php 
-if(isset($conn)) $conn->close();
+if(isset($con)) $con->close();
 ?> -->
 </body>
 <script type="text/javascript">
