@@ -1,23 +1,22 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start([
   'cookie_lifetime' => 86400,
 ]);
-$next = $_POST['next'];
-echo $next;
-// header('location:login.php');
 include('../function.php');
-// $con = mysqli_connect('localhost','root');
-if($con){
-    echo "connection was successfull";
+$next = $_POST['next'];
+if ($con) {
+  echo "Connection was successful";
+} else {
+  echo "No connection";
 }
-else{
-    echo "no connection";
-}
-$required = array('email' , 'password');
+$required = array('user', 'password');
 
 // Loop over field names, make sure each one exists and is not empty
 $error = false;
-foreach($required as $field) {
+foreach ($required as $field) {
   if (empty($_POST[$field])) {
     $error = true;
   }
@@ -26,26 +25,25 @@ foreach($required as $field) {
 if ($error) {
   echo "All fields are required.";
 } else {
-mysqli_select_db($con,'vpanel');
-#$name = $_POST['user'];
-$pass = $_POST['password'];
-$email = $_POST['email'];
-$q = " SELECT * FROM `teacher` WHERE email = '$email' AND password = '$pass'";
-$result = mysqli_query($con,$q);
-$num = mysqli_num_rows($result);
-if($num == 1){
-    #$_SESSION['username2'] = $name;
-    
-    while($row = mysqli_fetch_assoc($result)){
-      $_SESSION['id2'] = $row['id'];
-      if($next){
-        header('location:http://'.$_SERVER['SERVER_NAME'].$next.'');
-      }
-      // header('location:index');
+  mysqli_select_db($con, 'vpanel');
+  $name = $_POST['user'];
+  $pass = $_POST['password'];
+  $email = $_POST['email'];
+  $q = "SELECT * FROM `teacher` WHERE email = '$name' AND password = '$pass'";
+  $result = mysqli_query($con, $q);
+  $num = mysqli_num_rows($result);
+  if ($num == 1) {
+    $_SESSION['username'] = $name;
+    if ($next) {
+      header('location: login.php?next=' . urlencode($next));
+    } else {
+      header('location: index.php');
     }
-}
-else{
-    header('location:signup');
-}
+    while ($row = mysqli_fetch_array($result)) {
+      $_SESSION['id'] = $row['id'];
+    }
+  } else {
+    header('location: login.php?next=' . urlencode($next) . '&message=1');
+  }
 }
 ?>
