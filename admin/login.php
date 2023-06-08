@@ -20,7 +20,7 @@ $next = $_GET['next'];
     <title>Document</title>
     <style>
         body {
-            background-image: url('city.jpg');
+            background-image: url('../city.jpg');
             background-size: cover;
         }
     </style>
@@ -30,9 +30,7 @@ $next = $_GET['next'];
     <div class="upload">
         <div class="col-lg-6">
             <h2>Log in form</h2>
-            <form
-                action="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/login?next=' . $_SERVER['REQUEST_URI'] ?>"
-                method="post" enctype="multipart/form-data">
+            <form action="validation.php" method="post" enctype="multipart/form-data">
                 <div class="form-groop">
                     <label>email</label>
                     <br>

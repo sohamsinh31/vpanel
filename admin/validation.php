@@ -28,22 +28,22 @@ if ($error) {
   mysqli_select_db($con, 'vpanel');
   $name = $_POST['user'];
   $pass = $_POST['password'];
-  $email = $_POST['email'];
+  // $email = $_POST['email'];
   $q = "SELECT * FROM `teacher` WHERE email = '$name' AND password = '$pass'";
   $result = mysqli_query($con, $q);
   $num = mysqli_num_rows($result);
   if ($num == 1) {
     $_SESSION['username'] = $name;
     if ($next) {
-      header('location: login.php?next=' . urlencode($next));
+      // header('location: ' . urlencode($next));
     } else {
       header('location: index.php');
     }
     while ($row = mysqli_fetch_array($result)) {
-      $_SESSION['id'] = $row['id'];
+      $_SESSION['id2'] = $row['id'];
     }
   } else {
-    header('location: login.php?next=' . urlencode($next) . '&message=1');
+    header('location: admin/login.php?message=1');
   }
 }
 ?>
