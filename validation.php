@@ -35,7 +35,7 @@ if ($error) {
   if ($num == 1) {
     $_SESSION['username'] = $name;
     if ($next) {
-      header('location: login.php?next=' . urlencode($next));
+      header('location: ' . $next);
     } else {
       header('location: index.php');
     }

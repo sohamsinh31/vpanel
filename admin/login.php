@@ -1,11 +1,19 @@
 <?php
 session_start();
-if (!isset($_SESSION['id2'])) {
+if (!isset($_SESSION['id'])) {
     echo "<h3 style=alignment:'center'>Not logged in</h3>";
 } else {
     header('location:index.php');
 }
-$next = $_GET['next'];
+
+$next = '';
+$parts = parse_url($_SERVER['REQUEST_URI']);
+if (isset($parts['query'])) {
+    parse_str($parts['query'], $query);
+    if (isset($query['next'])) {
+        $next = $query['next'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -5,7 +5,15 @@ if (!isset($_SESSION['id'])) {
 } else {
     header('location:index.php');
 }
-$next = $_GET['next'];
+
+$next = '';
+$parts = parse_url($_SERVER['REQUEST_URI']);
+if (isset($parts['query'])) {
+    parse_str($parts['query'], $query);
+    if (isset($query['next'])) {
+        $next = $query['next'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
