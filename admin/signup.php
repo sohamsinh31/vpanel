@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link id="stylesheet" rel="stylesheet" type="text/css" href="../styles.css"/>  
-    <style>
-        body{
-            background-image: url('../city.jpg');
-            background-size:cover;
-        }
-    </style>
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="../styles.css" />
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <link id="stylesheet" rel="stylesheet" type="text/css" href="../styles.css" />
 </head>
+
 <body>
     <div class="upload">
-    <form action="ragistration.php" method="post" enctype="multipart/form-data">
-    <label>Fullname:</label>
-                    <br>
-                    <input style="width:80%;float:left;border-bottom: 2px solid white;background:none;border-style: none none solid;" type="text" name="user" class="form-control">
-<br>
-<br>
-<label>Choose degree:</label>  
-<select name="degree">
-    <option value="BE/BTECH">B.E/B.TECH</option>
-    <option value="BSC">B.Sc</option>
-    <option value="DIPLOMA">Diploma</option>
-    </select>
-    <br>
-    <label>Choose branch:</label>  
-<select name="branch">
-    <option value="CSE">Computer science and engineering</option>
-    <option value="ITE">Information technology and engineering</option>
-    <option value="IT">Information technology</option>
-    <option value="CH">Chemical engineering</option>
-    <option value="CV">Civil engineering</option>
-    <option value="MH">Mechanical engineering</option>
-    <option value="CE">Computer engineering</option>
-    <option value="PE">Pharmasutical engineering</option>
-    </select>
-    <br>
-<label>Email:</label><input type="email" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="email">
-                    <br>
-                    <label>Choose password:</label><input type="password" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="password">
-                    <label>Proffesion:</label><input type="text" style="width:80%;float:inline-end;border-bottom: 2px solid white;background:none;border-style: none none solid;" name="prof">
-    <button style="background-color:blue;border-radius:12px;width:30%;color:white;" onclick="return clickme();" class="btn btn-primary" type="submit"  name="submit">UPLOAD</button>
-    </form>
+        <form action="ragistration.php" method="post" enctype="multipart/form-data">
+            <label>Fullname:</label>
+            <br>
+            <input type="text" name="user" class="form-control">
+            <br>
+            <label>Choose branch:</label>
+            <?php
+            require_once("../function.php");
+            $q = "SELECT * FROM `branches`";
+            $result = $con->query($q);
+            $row = $result->fetch_all(MYSQLI_ASSOC);
+            $branches = array();
+            $branchesn = array();
+            $degree = array();
+            foreach ($row as $r) {
+                array_push($degree, $r['degree']);
+                array_push($branches, $r['name']);
+                array_push($branchesn, $r['id']);
+            }
+            echo '<select class="form-control selectpicker"  name="branch" data-live-search="true">';
+            for ($i = 0; $i < sizeof($branches); $i++) {
+                echo '<option value="' . $branchesn[$i] . '">' . $degree[$i] . '-' . $branches[$i] . '</option>';
+            }
+
+            echo '</select>';
+            ?>
+            <br>
+            <label>Email:</label><input type="email" style="" name="email">
+            <br>
+            <label>Choose password:</label><input type="password" style="" name="password">
+            <label>Proffesion:</label><input type="text" style="" name="prof">
+            <br>
+            <br>
+            <button style="background-color:blue;color:white;" onclick="return clickme();"
+                class="btn btn-primary" type="submit" name="submit">SUBMIT</button>
+        </form>
     </div>
 </body>
 <script src="../script.js"></script>

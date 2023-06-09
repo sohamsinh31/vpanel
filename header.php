@@ -2,9 +2,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sidebar</title>
     <!-- font-awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" />
 
@@ -80,7 +77,7 @@
         h2,
         h3,
         h4 {
-            color:white;
+            color: white;
             letter-spacing: var(--spacing);
             text-transform: capitalize;
             line-height: 1.25;
@@ -218,7 +215,7 @@ Sidebar
             transition: var(--transition);
             cursor: pointer;
             color: var(--clr-red-dark);
-            float:right;
+            float: right;
         }
 
         .close-btn:hover {
@@ -270,7 +267,7 @@ Sidebar
             left: 0;
             width: 100%;
             height: 100%;
-            background-color:#0e0e0e;
+            background-color: #0e0e0e;
             display: grid;
             grid-template-rows: auto 1fr auto;
             row-gap: 1rem;
@@ -294,91 +291,98 @@ Sidebar
             margin-left: auto;
             margin-right: auto;
         }
-        .app_header{
-            width:98%;
-            border-radius:12px;
-            border:solid white;
-            background-color:#ffffff10;
-            backdrop-filter:blur(12px);
-            height:62px;
+
+        .app_header {
+            width: 98%;
+            border-radius: 12px;
+            border: solid white;
+            background-color: #ffffff10;
+            backdrop-filter: blur(12px);
+            height: 62px;
             justify-content: space-between;
         }
-        .right{
-            right:0;
-            float:right;
-            top:0;
-            position:fixed;
+
+        .right {
+            right: 0;
+            float: right;
+            top: 0;
+            position: fixed;
         }
-        .app_header_image{
-            width:56px;
-            border-radius:100px;
+
+        .app_header_image {
+            width: 56px;
+            border-radius: 100px;
         }
+
         a {
-            color:inherit;
+            color: inherit;
         }
     </style>
 </head>
+
 <body>
     <div class="app_header">
-    <button class="sidebar-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
-    <h1><a href="index">VPANEL</a></h1>
-    <br>
-    <div class="right">
-        <?php 
-			$id = $_SESSION['id'];
-            include('function.php');
-				$q = "SELECT * FROM `studentinfo` where id = '$id'";
-				$result = mysqli_query($con,$q);
-				$num = mysqli_num_rows($result);
-				$id = $_SESSION['id'];
-                $enroll = '';
-				if($num>0){
-					while($row = mysqli_fetch_assoc($result)){
-                        $enroll.=$row['enrollment'];
-					  echo  "<img class='app_header_image' src='".$row['photourl']."' alt=''>";
-					}
-				}
-        ?>
-    <!-- <img class="app_header_image" src="image.jpeg" alt="hi"> -->
+        <button class="sidebar-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1><a href="index">VPANEL</a></h1>
+        <br>
+        <div class="right">
+            <?php
+            $id = $_SESSION['id'];
+            include_once('function.php');
+            $q = "SELECT * FROM `studentinfo` where id = '$id'";
+            $result = mysqli_query($con, $q);
+            $num = mysqli_num_rows($result);
+            $id = $_SESSION['id'];
+            $enroll = '';
+            if ($num > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $enroll .= $row['enrollment'];
+                    echo "<img class='app_header_image' src='" . $row['photourl'] . "' alt=''>";
+                }
+            }
+            ?>
+            <!-- <img class="app_header_image" src="image.jpeg" alt="hi"> -->
+        </div>
     </div>
-    </div>
-    
+
     <aside class="sidebar">
         <div class="sidebar-header">
-        <button class="close-btn"><i class="fas fa-times"></i></button>
+            <button class="close-btn"><i class="fas fa-times"></i></button>
         </div>
-        <h6 style="text-align: center;"><?php echo $enroll; ?></h6>
+        <h6 style="text-align: center;">
+            <?php echo $enroll; ?>
+        </h6>
 
         <ul class="links">
-        <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/index' ?>">Home</a>
+            <li>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/index' ?>">Home</a>
             </li>
             <hr>
             <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/attandance/index' ?>">Attendence</a>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/attandance/index' ?>">Attendence</a>
             </li>
             <hr>
 
             <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/fees/index' ?>">Academic Fees</a>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/fees/index' ?>">Academic Fees</a>
             </li>
             <hr>
             <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/timeline' ?>">Academic Notices</a>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/timeline' ?>">Academic Notices</a>
             </li>
             <hr>
             <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/courceout' ?>">Course Outline</a>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/courceout' ?>">Course Outline</a>
             </li>
             <hr>
             <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/exam/index' ?>">Exam Timetable</a>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/exam/index' ?>">Exam Timetable</a>
             </li>
             <hr>
             <li>
-                <a href="<?php echo 'http://'.$_SERVER['SERVER_NAME'].'/repository' ?>">repository</a>
+                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/repository' ?>">repository</a>
             </li>
         </ul>
 
@@ -389,7 +393,7 @@ Sidebar
         const closeBtn = document.querySelector(".close-btn");
         const sidebar = document.querySelector(".sidebar");
 
-        toggleBtn.addEventListener("click", function() {
+        toggleBtn.addEventListener("click", function () {
             // if (sidebar.classList.contains("show-sidebar")) {
             //   sidebar.classList.remove("show-sidebar");
             // } else {
@@ -398,7 +402,7 @@ Sidebar
             sidebar.classList.toggle("show-sidebar");
         });
 
-        closeBtn.addEventListener("click", function() {
+        closeBtn.addEventListener("click", function () {
             sidebar.classList.remove("show-sidebar");
         });
     </script>

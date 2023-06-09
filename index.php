@@ -82,7 +82,7 @@ if(!isset($_SESSION['id'])){
   </button>
   <div id="birthday"></div>
 </body>
-<script src="admin/js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery-3.6.0.min.js" type="text/javascript"></script>
 <script type="text/javascript">
       $(document).ready(function(){
     // Load Table Records
@@ -106,7 +106,6 @@ if(!isset($_SESSION['id'])){
       });
     }
     birthday();
-     // Load Table Records on Page Load
 });
 </script>
 </html>
