@@ -1,3 +1,7 @@
+<?php
+// session_start();
+include_once('function.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -330,17 +334,21 @@ Sidebar
         <div class="right">
             <?php
             $id = $_SESSION['id'];
-            include_once('function.php');
             $q = "SELECT * FROM `studentinfo` where id = '$id'";
             $result = mysqli_query($con, $q);
-            $num = mysqli_num_rows($result);
-            $id = $_SESSION['id'];
-            $enroll = '';
-            if ($num > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $enroll .= $row['enrollment'];
-                    echo "<img class='app_header_image' src='" . $row['photourl'] . "' alt=''>";
+
+            if ($result) {
+                $num = mysqli_num_rows($result);
+
+                if ($num > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        echo "<img class='app_header_image' src='" . $row['photourl'] . "' alt=''>";
+                    }
+                } else {
+                    echo "No records found for this ID.";
                 }
+            } else {
+                echo "Error executing query: " . mysqli_error($con);
             }
             ?>
             <!-- <img class="app_header_image" src="image.jpeg" alt="hi"> -->
@@ -393,7 +401,7 @@ Sidebar
         const closeBtn = document.querySelector(".close-btn");
         const sidebar = document.querySelector(".sidebar");
 
-        toggleBtn.addEventListener("click", function () {
+        toggleBtn.addEventListener("click", function() {
             // if (sidebar.classList.contains("show-sidebar")) {
             //   sidebar.classList.remove("show-sidebar");
             // } else {
@@ -402,7 +410,7 @@ Sidebar
             sidebar.classList.toggle("show-sidebar");
         });
 
-        closeBtn.addEventListener("click", function () {
+        closeBtn.addEventListener("click", function() {
             sidebar.classList.remove("show-sidebar");
         });
     </script>

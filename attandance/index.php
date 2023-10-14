@@ -193,10 +193,6 @@ $percentage = (100 * $avg) / $sum . "%";
 <script src="./js/script.js"></script>
 
 <script type="text/javascript">
-    // $("#attandance").on("click",function(e){
-    //     console.log("hi");
-    //     document.getElementById("description").value = e.target.value;
-    // })
     $("document").on("ready", function () {
         $("#load1").on('click', function (e) {
             e.preventDefault();

@@ -1,10 +1,11 @@
-<?php 
+<?php
 session_start();
 if (!$_SESSION['id2']) {
     header('location:http://' . $_SERVER['SERVER_NAME'] . '/admin/login?next=' . $_SERVER['REQUEST_URI']);
 }
+include_once("../function.php");
 ?>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -81,24 +82,28 @@ if (!$_SESSION['id2']) {
     <div id="custom">
         <form enctype="multipart/form-data" method="POST" action="">
             <label>Choose degree:</label>
-            <select name="degree" id="degree">
-                <option value="none">-</option>
-                <option value="BE/BTECH">B.E/B.TECH</option>
-                <option value="BSC">B.Sc</option>
-                <option value="DIPLOMA">Diploma</option>
-            </select>
-            <label>Choose branch:</label>
-            <select name="branch" id="branch">
-                <option value="none">-</option>
-                <option value="CS">Computer science and engineering</option>
-                <option value="IE">Information technology and engineering</option>
-                <option value="IT">Information technology</option>
-                <option value="CH">Chemical engineering</option>
-                <option value="CV">Civil engineering</option>
-                <option value="MH">Mechanical engineering</option>
-                <option value="CE">Computer engineering</option>
-                <option value="PE">Pharmasutical engineering</option>
-            </select>
+            <?php
+                $q = "SELECT * FROM `branches`";
+                $result = $con->query($q);
+                $row = $result->fetch_all(MYSQLI_ASSOC);
+                $branches = array();
+                $branchesn = array();
+                $degree = array();
+                foreach ($row as $r) {
+                    array_push($degree, $r['degree']);
+                    array_push($branches, $r['name']);
+                    array_push($branchesn, $r['id']);
+                }
+                ?>
+                <label>Choose branch:</label>
+                <?php
+                echo '<select class="form-control selectpicker"  name="branch" data-live-search="true">';
+                for ($i = 0; $i < sizeof($branches); $i++) {
+                    echo '<option value="' . $branchesn[$i] . '">' . $degree[$i] . '-' . $branches[$i] . '</option>';
+                }
+
+                echo '</select>';
+                ?>
             <label>Choose sem:</label>
             <select id="sem" name="semester">
                 <option value="none">-</option>
@@ -131,53 +136,43 @@ if (!$_SESSION['id2']) {
                                     <input type="hidden" name="id" value="">
                                     <div class="form-group mb-2">
                                         <label for="title" class="control-label">Subject</label>
-                                        <input type="text" class="form-control form-control-sm rounded-0" name="title"
-                                            id="title" required>
+                                        <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="description" class="control-label">Enrollment</label>
-                                        <textarea rows="3" class="form-control form-control-sm rounded-0"
-                                            name="description" id="description"></textarea>
+                                        <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description"></textarea>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="absent" class="control-label">Absent</label>
-                                        <textarea rows="3" class="form-control form-control-sm rounded-0" name="absent"
-                                            id="absent"></textarea>
+                                        <textarea rows="3" class="form-control form-control-sm rounded-0" name="absent" id="absent"></textarea>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="title" class="control-label">Branch</label>
-                                        <input type="text" class="form-control form-control-sm rounded-0" name="branch2"
-                                            id="branch2" required>
+                                        <input type="text" class="form-control form-control-sm rounded-0" name="branch2" id="branch2" required>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="title" class="control-label">Degree</label>
-                                        <input type="text" class="form-control form-control-sm rounded-0" name="degree2"
-                                            id="degree2" required>
+                                        <input type="text" class="form-control form-control-sm rounded-0" name="degree2" id="degree2" required>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="title" class="control-label">semester</label>
-                                        <input type="text" class="form-control form-control-sm rounded-0"
-                                            name="semester2" id="semester2" required>
+                                        <input type="text" class="form-control form-control-sm rounded-0" name="semester2" id="semester2" required>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="start_datetime" class="control-label">Start</label>
-                                        <input type="datetime-local" class="form-control form-control-sm rounded-0"
-                                            name="start_datetime" id="start_datetime" required>
+                                        <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
                                     </div>
                                     <div class="form-group mb-2">
                                         <label for="end_datetime" class="control-label">End</label>
-                                        <input type="datetime-local" class="form-control form-control-sm rounded-0"
-                                            name="end_datetime" id="end_datetime" required>
+                                        <input type="datetime-local" class="form-control form-control-sm rounded-0" name="end_datetime" id="end_datetime" required>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="text-center">
-                                <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i
-                                        class="fa fa-save"></i> Save</button>
-                                <button class="btn btn-default border btn-sm rounded-0" type="reset"
-                                    form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
+                                <button class="btn btn-primary btn-sm rounded-0" type="submit" form="schedule-form"><i class="fa fa-save"></i> Save</button>
+                                <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
                             </div>
                         </div>
                     </div>
@@ -211,12 +206,9 @@ if (!$_SESSION['id2']) {
                     </div>
                     <div class="modal-footer rounded-0">
                         <div class="text-end">
-                            <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit"
-                                data-id="">Edit</button>
-                            <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete"
-                                data-id="">Delete</button>
-                            <button type="button" class="btn btn-secondary btn-sm rounded-0"
-                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
+                            <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
+                            <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -245,9 +237,9 @@ if (!$_SESSION['id2']) {
         }
         ?>
         <!-- <?php
-        if (isset($con))
-            $con->close();
-        ?> -->
+                if (isset($con))
+                    $con->close();
+                ?> -->
 </body>
 <script type="text/javascript">
     var scheds = $.parseJSON('<?= json_encode($sched_res) ?>');
@@ -255,23 +247,30 @@ if (!$_SESSION['id2']) {
 <script src="./js/script.js"></script>
 <script src="./js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-    $("#current").on("click", function () {
+    $("#current").on("click", function() {
         $.ajax({
             url: "current.php",
             type: "GET",
-            success: function (data) {
+            success: function(data) {
                 console.log(data.length)
                 if (data.length == 0) {
                     $("#loadbranch").html("<h2>No data aviable</h2>");
-                }
-                else {
-                    $.each(JSON.parse(data), function (ind, val) {
+                } else {
+                    $.each(JSON.parse(data), function(ind, val) {
                         console.log(val.id, val.sem, val.branch, val.degree);
                         $.ajax({
                             url: "loadbranch.php",
                             type: "POST",
-                            data: { branch: val.branch, sem: val.sem, degree: val.degree, class: val.class, sub: val.subject, startt: val.startt, endd: val.endd },
-                            success: function (data) {
+                            data: {
+                                branch: val.branch,
+                                sem: val.sem,
+                                degree: val.degree,
+                                class: val.class,
+                                sub: val.subject,
+                                startt: val.startt,
+                                endd: val.endd
+                            },
+                            success: function(data) {
                                 console.log(data);
                                 $("#loadbranch").html(data);
                             }
@@ -281,6 +280,7 @@ if (!$_SESSION['id2']) {
             }
         })
     })
+
     function deleteAbsent(name) {
         let elemm = document.getElementById("absent").value;
         let index = elemm.indexOf(name);
@@ -295,13 +295,16 @@ if (!$_SESSION['id2']) {
             //}
         }
     }
+
     function deletePresent(name) {
 
     }
+
     function foo() {
         // alert("Submit button clicked!");
         return true;
     }
+
     function handlechange(name) {
         let elemm = document.getElementById("description").value;
         let index = elemm.indexOf(name);
@@ -314,6 +317,7 @@ if (!$_SESSION['id2']) {
         // deleteAbsent(name);
         //}
     }
+
     function Absent(name) {
         let elem2 = document.getElementById("absent").value += name + ",";
     }

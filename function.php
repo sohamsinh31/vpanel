@@ -1,5 +1,45 @@
 <?php
-$con = mysqli_connect('localhost', 'root', 'root', 'vpanel');
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "vpanel"; // Assuming your database is named 'vpanel'
+
+// Create connection
+$con = new mysqli($servername, $username, $password,$dbname);
+
+// Check connection
+// if ($conn->connect_error) {
+//     die("Connection failed: " . $conn->connect_error);
+// }
+
+// // Check if the database exists
+// $result = $conn->query("SHOW DATABASES LIKE '$dbname'");
+
+// if ($result->num_rows == 0) {
+//     echo "Database '$dbname' does not exist.<br>";
+// } else {
+//     echo "Database '$dbname' exists.<br>";
+
+//     // Select the database
+//     $conn->select_db($dbname);
+
+//     if ($conn->error) {
+//         die("Database selection failed: " . $conn->error);
+//     }
+
+//     // Execute the SQL script
+//     $sqlScriptPath = "sql/vpanel.sql";
+//     $sqlFileContents = file_get_contents($sqlScriptPath);
+
+//     if ($conn->multi_query($sqlFileContents)) {
+//         echo "SQL script executed successfully<br>";
+//     } else {
+//         echo "Error executing SQL script: " . $conn->error;
+//     }
+// }
+
+
 // mysqli_select_db($con,'vpanel');
 function userimage($sid)
 {

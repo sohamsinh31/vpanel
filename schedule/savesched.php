@@ -1,47 +1,42 @@
-<?php 
+<?php
+
 include('../function.php');
-if($_SERVER['REQUEST_METHOD'] !='POST'){
-    echo "<script> alert('Error: No data to save.'); location.replace('./index') </script>";
-    $con->close();
-    exit;
+
+function saveSchedule($data) {
+    global $con;
+
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        return array('error' => 'No data to save.');
+    }
+
+    $present = isset($data['present']) ? $data['present'] : array();
+    $absent = isset($data['absent']) ? $data['absent'] : array();
+    $presentEnrollments = implode(',', $present);
+    $absentEnrollments = implode(',', $absent);
+    $startt = isset($data['start1']) && isset($data['start2']) ? $data['start1'] . ' ' . $data['start2'] : '';
+    $endd = isset($data['end1']) && isset($data['end2']) ? $data['end1'] . ' ' . $data['end2'] : '';
+    $branch = isset($data['branch']) ? $data['branch'] : '';
+    $sem = isset($data['sem']) ? $data['sem'] : '';
+    $degree = isset($data['degree']) ? $data['degree'] : '';
+    $sub = isset($data['sub']) ? $data['sub'] : '';
+
+    $sql = "INSERT INTO `schedule_list` (`title`,`description`,`absent`,`degree`,`branch`,`semester`,`start_datetime`,`end_datetime`) 
+            VALUES ('$sub','$presentEnrollments','$absentEnrollments','$degree','$branch','$sem','$startt','$endd')";
+
+    $save = $con->query($sql);
+
+    if ($save) {
+        return array('success' => 'Schedule successfully saved.');
+    } else {
+        return array('error' => 'An error occurred.', 'details' => $con->error, 'sql' => $sql);
+    }
 }
-if(isset($_POST['present'])){
-$pr1 = $_POST['present'];
-$prr1 = sizeof($pr1);
-}
-if(isset($_POST['absent'])){
-    $ab1 = $_POST['absent'];
-    $abb1 = sizeof($ab1);
-}
-$absent = '';
-$present = '';
-for($i=0;$i<$abb1;$i++){
-    $absent .= $_POST['absent'][$i].',';
-}
-for($i=0;$i<$prr1;$i++){
-    $present .= $_POST['present'][$i].',';
-}
-$start1 = $_POST['start1'];
-$start2 = $_POST['start2'];
-$end1 = $_POST['end1'];
-$end2 = $_POST['end2'];
-$startt = $start1." ".$start2;
-$endd = $end1." ".$end2;
-$branch = $_POST['branch'];
-$sem = $_POST['sem'];
-$degree = $_POST['degree'];
-$sub = $_POST['sub'];
-echo $startt."<br>".$endd;
-$sql = "INSERT INTO `schedule_list` (`title`,`description`,`absent`,`degree`,`branch`,`semester`,`start_datetime`,`end_datetime`) VALUES ('$sub','$present','$absent','$degree','$branch','$sem','$startt','$endd')";
-$save = $con->query($sql);
-if($save){
-    echo "<script> alert('Schedule Successfully Saved.'); location.replace('./index') </script>";
-}else{
-    echo "<pre>";
-    echo "An Error occured.<br>";
-    echo "Error: ".$con->error."<br>";
-    echo "SQL: ".$sql."<br>";
-    echo "</pre>";
-}
+
+$json_data = file_get_contents('php://input');
+$data = json_decode($json_data, true);
+
+$response = saveSchedule($data);
+echo json_encode($response);
+
 $con->close();
 ?>
