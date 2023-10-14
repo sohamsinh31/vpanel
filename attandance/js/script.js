@@ -1,18 +1,18 @@
 var calendar;
 var Calendar = FullCalendar.Calendar;
 var events = [];
-$(function() {
+$(function () {
     if (!!scheds) {
         Object.keys(scheds).map(k => {
             var row = scheds[k]
-            if(row.description.indexOf(enrollment)>=0){
-            events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'green',color:'green',rendering: 'background' });
+            if (row.description.indexOf(enrollment) >= 0) {
+                events.push({ id: row.id, title: row.title, allDay: true, start: row.start_datetime, end: row.end_datetime, backgroundColor: 'green', color: 'green', rendering: 'background' });
             }
-            else if(row.absent.indexOf(enrollment)>=0){
-                events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'red',color:'red',rendering: 'background' });
+            else if (row.absent.indexOf(enrollment) >= 0) {
+                events.push({ id: row.id, title: row.title, allDay: true, start: row.start_datetime, end: row.end_datetime, backgroundColor: 'red', color: 'red', rendering: 'background' });
             }
-            else{
-                events.push({ id: row.id, title: row.title,allDay:true, start: row.start_datetime, end: row.end_datetime,backgroundColor:'gray',color:'red',rendering: 'background' });
+            else {
+                events.push({ id: row.id, title: row.title, allDay: true, start: row.start_datetime, end: row.end_datetime, backgroundColor: 'gray', color: 'red', rendering: 'background' });
 
             }
         })
@@ -25,7 +25,7 @@ $(function() {
     calendar = new Calendar(document.getElementById('calendar'), {
         initialView: 'dayGridMonth',
         height: 850,
-        themeSystem:'bootstrap',
+        themeSystem: 'bootstrap',
         headerToolbar: {
             left: 'prev,next today',
             right: 'dayGridMonth,dayGridWeek,list',
@@ -33,7 +33,7 @@ $(function() {
         },
         events: events,
         selectable: false,
-        eventClick: function(info) {
+        eventClick: function (info) {
             var _details = $('#event-details-modal')
             var id = info.event.id
             if (!!scheds[id]) {
@@ -48,7 +48,7 @@ $(function() {
                 alert("Event is undefined");
             }
         },
-        eventDidMount: function(info) {
+        eventDidMount: function (info) {
             // Do Something after events mounted
         },
         editable: false
@@ -57,13 +57,13 @@ $(function() {
     calendar.render();
 
     // Form reset listener
-    $('#schedule-form').on('reset', function() {
+    $('#schedule-form').on('reset', function () {
         // $(this).find('input:hidden').val('')
         // $(this).find('input:visible').first().focus()
     })
 
     // Edit Button
-    $('#edit').click(function() {
+    $('#edit').click(function () {
         // var id = $(this).attr('data-id')
         // if (!!scheds[id]) {
         //     var _form = $('#schedule-form')
@@ -85,7 +85,7 @@ $(function() {
     })
 
     // Delete Button / Deleting an Event
-    $('#delete').click(function() {
+    $('#delete').click(function () {
         // var id = $(this).attr('data-id')
         // if (!!scheds[id]) {
         //     var _conf = confirm("Are you sure to delete this scheduled event?");
