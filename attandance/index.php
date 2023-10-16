@@ -1,14 +1,21 @@
-<?php 
+<?php
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', '/path/to/error.log');
+?>
 
+<!-- <form action="./session.php" method="post">
+    <input type="text" id="fname" name="fname"><br><br>
+    <button type="submit">Set Session</button>
+</form> -->
 
+<?php
 session_start();
 if (!isset($_SESSION['id'])) {
     header('location:http://' . $_SERVER['SERVER_NAME'] . '/login?next=' . $_SERVER['REQUEST_URI']);
 }
 $sid = $_SESSION['id'];
+// echo $sid . "<br>";
 include("../function.php");
 $qq = "SELECT * FROM `studentinfo` WHERE id='{$sid}'";
 $rrr = mysqli_query($con, $qq);
@@ -144,12 +151,9 @@ $percentage = (100 * $avg) / $sum . "%";
                         </div>
                         <div class="modal-footer rounded-0">
                             <div class="text-end">
-                                <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit"
-                                    data-id="">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete"
-                                    data-id="">Delete</button>
-                                <button type="button" class="btn btn-secondary btn-sm rounded-0"
-                                    data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
+                                <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
+                                <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -193,8 +197,8 @@ $percentage = (100 * $avg) / $sum . "%";
 <script src="./js/script.js"></script>
 
 <script type="text/javascript">
-    $("document").on("ready", function () {
-        $("#load1").on('click', function (e) {
+    $("document").on("ready", function() {
+        $("#load1").on('click', function(e) {
             e.preventDefault();
             let branch = $("#branch").val();
             let sem = $("#sem").val();
@@ -203,8 +207,12 @@ $percentage = (100 * $avg) / $sum . "%";
             $.ajax({
                 url: "loadbranch.php",
                 type: "POST",
-                data: { branch: branch, sem: sem, degree: degree },
-                success: function (data) {
+                data: {
+                    branch: branch,
+                    sem: sem,
+                    degree: degree
+                },
+                success: function(data) {
                     console.log(data);
                     $("#loadbranch").html(data);
                 }
@@ -215,6 +223,7 @@ $percentage = (100 * $avg) / $sum . "%";
             console.log(name);
             document.getElementById("description").value += name + ",";
         }
+
         function Absent(name) {
             console.log(name);
             document.getElementById("absent").value += name + ",";

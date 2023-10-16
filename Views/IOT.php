@@ -15,29 +15,55 @@ function getDataForTag($tag)
     }
 }
 
+function getClassTimetable()
+{
+    global $con;
+
+    $result = $con->query("SELECT * FROM timetable WHERE subject='SESH1080'");
+
+    if ($result && $result->num_rows > 0) {
+        $data = $result->fetch_assoc();
+        return $data;
+    } else {
+        return null;
+    }
+}
+
+$classTimetable = getClassTimetable();
+
 // Get tag from Thingspeak
 $channelID = 2304789;
 $url = "https://api.thingspeak.com/channels/$channelID/feeds.json?results=2";
 $data = json_decode(file_get_contents($url), true);
 
 $tableData = array();
+date_default_timezone_set('Asia/Calcutta');
 
 if (isset($data['feeds'])) {
     foreach ($data['feeds'] as $feed) {
         if (isset($feed['field3'])) {
             $tag = $feed['field3'];
-            $startTime = $feed['created_at'];
+            $startTime = date('Y-m-d H:i:s');
             $endTime = date('Y-m-d H:i:s', strtotime($startTime . ' +50 minutes'));
 
             $studentData = getDataForTag($tag);
 
             if ($studentData) {
                 $branchResult = $con->query("SELECT * FROM branches WHERE id = '{$studentData['branchid']}'");
-                
+
                 if ($branchResult && $branchResult->num_rows > 0) {
                     $branchData = $branchResult->fetch_assoc();
                     $branchName = $branchData['name'];
                     $degree = $branchData['degree'];
+
+                    $insertQuery = "INSERT INTO schedule_list (id, title, description, absent, degree, branch, semester, start_datetime, end_datetime) 
+                                            VALUES (NULL, 'SECH1080', '{$studentData['enrollment']}', 'NA', '$degree', '{$branchData['id']}', '{$studentData['semester']}', '$startTime', '$endTime')";
+
+                    if ($con->query($insertQuery) === TRUE) {
+                        echo "Record inserted successfully";
+                    } else {
+                        echo "Error inserting record: " . $con->error;
+                    }
                 } else {
                     $branchName = 'N/A';
                     $degree = 'N/A';
@@ -57,8 +83,8 @@ if (isset($data['feeds'])) {
                 $tableData[] = array(
                     'tag' => $tag,
                     'enrollment' => NULL,
-                    'start_time' => NULL,
-                    'end_time' => NULL,
+                    'start_time' => $startTime,
+                    'end_time' => $endTime,
                     'degree' => NULL,
                     'branch' => NULL,
                     'semester' => NULL,

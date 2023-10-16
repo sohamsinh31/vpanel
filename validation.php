@@ -28,10 +28,11 @@ if ($error) {
   mysqli_select_db($con, 'vpanel');
   $name = $_POST['user'];
   $pass = $_POST['password'];
-  $email = $_POST['email'];
+  // $email = $_POST['email'];
   $q = "SELECT * FROM `studentinfo` WHERE email = '$name' AND password = '$pass'";
   $result = mysqli_query($con, $q);
   $num = mysqli_num_rows($result);
+  echo $num;
   if ($num == 1) {
     $_SESSION['username'] = $name;
     if ($next) {
