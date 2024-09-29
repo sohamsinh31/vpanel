@@ -1,15 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['id'])) {
-  header('location:http://' . $_SERVER['SERVER_NAME'] . '/login?next=' . $_SERVER['REQUEST_URI']);
-}
+require_once("redirector.php");
 include('header.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <link rel="stylesheet" href="timeline.css" />
   <link rel="stylesheet" href="styles.css" />
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

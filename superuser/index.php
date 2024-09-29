@@ -1,121 +1,118 @@
 <?php
-session_start();
-if(!isset($_SESSION['id2'])){
-    header('location:http://'.$_SERVER['SERVER_NAME'].'/admin/login?next='.$_SERVER['REQUEST_URI']);
-}
+require_once("../redirector.php");
 include('header.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<link href="../../js/bootstrap.min.js" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link href="../../js/bootstrap.min.js" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
-<link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/timepicker.js/latest/timepicker.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-size: 1.2rem;
+      background-color: black;
+      color: white;
+    }
 
-body {
-  font-size: 1.2rem;
-  background-color:black;
-  color:white;
-}
+    hr {
+      width: 60px;
+    }
 
-hr {
-  width: 60px;
-}
+    .photo-info {
+      opacity: 0.8;
+    }
 
-.photo-info {
-  opacity: 0.8;
-}
+    .caption {
+      padding-left: 30%;
+      padding-right: 30%;
+    }
 
-.caption {
-  padding-left: 30%;
-  padding-right: 30%;
-}
+    .yellow-color {
+      color: #D69314 !important;
+    }
 
-.yellow-color {
-  color: #D69314 !important;
-}
+    .green-color {
+      color: #065C73;
+    }
 
-.green-color {
-  color: #065C73;
-}
+    .background-black {
+      background-color: #000;
+    }
 
-.background-black {
-  background-color: #000;
-}
+    .background-green {
+      background-color: #065C73;
+    }
 
-.background-green {
-  background-color: #065C73;
-}
+    .yellow-background {
+      background-color: #D69314;
+    }
 
-.yellow-background {
-  background-color: #D69314;
-}
+    .large-text {
+      font-size: 3rem;
+    }
 
-.large-text {
-  font-size: 3rem;
-}
+    .card {
+      width: 20rem;
+    }
 
-.card {
-  width: 20rem;
-}
+    .icon-circle {
+      padding-top: 7px;
+      min-width: 90px;
+      min-height: 90px;
+      max-width: 90px;
+      max-height: 90px;
+      background: #065C73;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      border-radius: 50%;
+    }
 
-.icon-circle {
-  padding-top: 7px;
-  min-width: 90px;
-  min-height: 90px;
-  max-width: 90px;
-  max-height: 90px;
-  background: #065C73;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%;
-}
+    #main-photo {
+      background: url("https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80");
+      background-size: cover;
+      background-position: center center;
+      min-height: 720px;
+    }
 
-#main-photo {
-  background: url("https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80");
-  background-size: cover;
-  background-position: center center;
-  min-height: 720px;
-}
+    #how-we-teach-header {
+      background-size: 100%;
+      min-height: 200px;
+      background: url("https://images.unsplash.com/photo-1536148935331-408321065b18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=933&q=80");
+      background-attachment: fixed;
+      background-position: 0 -300px;
+      text-align: center;
+      color: #fff;
+    }
 
-#how-we-teach-header {
-  background-size: 100%;
-  min-height: 200px;
-  background: url("https://images.unsplash.com/photo-1536148935331-408321065b18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=933&q=80");
-  background-attachment: fixed;
-  background-position: 0 -300px;
-  text-align: center;
-  color: #fff;
-}
+    #we-teach {
+      text-align: left;
+    }
 
-#we-teach {
-  text-align: left;
-}
+    @media only screen and (max-width: 600px) {
+      .caption {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+    }
 
-@media only screen and (max-width: 600px) {
-  .caption {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-
-/* .dropdown-item{
+    /* .dropdown-item{
     color:white;
 } */
-
-    </style>
+  </style>
 </head>
+
 <body>
-    
+
   <!-- SECTION: PHOTO WITH TEXT AND BUTTON -->
   <section id="main-photo" class="text-center">
     <div class="container-fluid">
@@ -433,4 +430,5 @@ hr {
     </div>
   </footer>
 </body>
+
 </html>

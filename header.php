@@ -1,420 +1,112 @@
 <?php
 // session_start();
 include_once('function.php');
+
+// Get the subfolder path
+$subfolder = dirname($_SERVER['SCRIPT_NAME']);
+
+// Get the full current URL and base URL dynamically
+$curr_dir = 'http://' . $_SERVER['SERVER_NAME'] . $subfolder;
+
+// Normalize base URL by removing potential backslashes at the end
+$curr_dir = rtrim($curr_dir, '/\\');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <!-- font-awesome -->
-    <link rel="stylesheet" href="./ThirdParty/fontawesome/css/all.min.css" />
+    <head>
+        <!-- Use the dynamic base URL for CSS and JS imports -->
+        <link href="<?php echo $curr_dir; ?>/Vendors/bootstrap5/css/bootstrap.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo $curr_dir; ?>/Vendors/fontawesome/css/all.min.css" />
 
-    <style>
-        @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
-
-        :root {
-            /* dark shades of primary color*/
-            --clr-primary-1: hsl(205, 86%, 17%);
-            --clr-primary-2: hsl(205, 77%, 27%);
-            --clr-primary-3: hsl(205, 72%, 37%);
-            --clr-primary-4: hsl(205, 63%, 48%);
-            /* primary/main color */
-            --clr-primary-5: hsl(205, 78%, 60%);
-            /* lighter shades of primary color */
-            --clr-primary-6: hsl(205, 89%, 70%);
-            --clr-primary-7: hsl(205, 90%, 76%);
-            --clr-primary-8: hsl(205, 86%, 81%);
-            --clr-primary-9: hsl(205, 90%, 88%);
-            --clr-primary-10: hsl(205, 100%, 96%);
-            /* darkest grey - used for headings */
-            --clr-grey-1: hsl(209, 61%, 16%);
-            --clr-grey-2: hsl(211, 39%, 23%);
-            --clr-grey-3: hsl(209, 34%, 30%);
-            --clr-grey-4: hsl(209, 28%, 39%);
-            /* grey used for paragraphs */
-            --clr-grey-5: hsl(210, 22%, 49%);
-            --clr-grey-6: hsl(209, 23%, 60%);
-            --clr-grey-7: hsl(211, 27%, 70%);
-            --clr-grey-8: hsl(210, 31%, 80%);
-            --clr-grey-9: hsl(212, 33%, 89%);
-            --clr-grey-10: hsl(210, 36%, 96%);
-            --clr-white: #fff;
-            --clr-red-dark: hsl(360, 67%, 44%);
-            --clr-red-light: hsl(360, 71%, 66%);
-            --clr-green-dark: hsl(125, 67%, 44%);
-            --clr-green-light: hsl(125, 71%, 66%);
-            --clr-black: #222;
-            --ff-primary: "Roboto", sans-serif;
-            --ff-secondary: "Open Sans", sans-serif;
-            --transition: all 0.3s linear;
-            --spacing: 0.1rem;
-            --radius: 0.25rem;
-            --light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            --max-width: 1170px;
-            --fixed-width: 620px;
-        }
-
-        *,
-        ::after,
-        ::before {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--ff-secondary);
-            line-height: 1.5;
-            font-size: 0.875rem;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            color: white;
-            letter-spacing: var(--spacing);
-            text-transform: capitalize;
-            line-height: 1.25;
-            margin-bottom: 0.75rem;
-            font-family: var(--ff-primary);
-        }
-
-        h1 {
-            font-size: 3rem;
-        }
-
-        h2 {
-            font-size: 2rem;
-        }
-
-        h3 {
-            font-size: 1.25rem;
-        }
-
-        h4 {
-            font-size: 0.875rem;
-        }
-
-        p {
-            margin-bottom: 1.25rem;
-            color: var(--clr-grey-5);
-        }
-
-        aside h2 {
-            text-align: center;
-        }
-
-        @media screen and (min-width: 800px) {
-            h1 {
-                font-size: 4rem;
+        <style>
+            .app_header_image {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
             }
 
-            h2 {
-                font-size: 2.5rem;
+            .sidebar-toggle {
+                background: none;
+                border: none;
+                color: #fff;
             }
 
-            h3 {
-                font-size: 1.75rem;
+            .sidebar-toggle:hover {
+                color: #ddd;
             }
 
-            h4 {
-                font-size: 1rem;
-            }
-
-            body {
-                font-size: 1rem;
-            }
-
-            h1,
-            h2,
-            h3,
-            h4 {
-                line-height: 1;
-            }
-        }
-
-        /*  global classes */
-
-        /* section */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-center {
-            width: 90vw;
-            margin: 0 auto;
-            max-width: 1170px;
-        }
-
-        @media screen and (min-width: 992px) {
-            .section-center {
-                width: 95vw;
-            }
-        }
-
-        main {
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-        }
-
-        /*
-=============== 
-Sidebar
-===============
-*/
-        .sidebar-toggle {
-            position: absolute;
-            top: 1rem;
-            font-size: 2rem;
-            background: transparent;
-            border-color: transparent;
-            color: var(--clr-primary-5);
-            transition: var(--transition);
-            cursor: pointer;
-            animation: bounce 2s ease-in-out infinite;
-            left: 14rem;
-        }
-
-        .sidebar-toggle:hover {
-            color: var(--clr-primary-7);
-        }
-
-        @keyframes bounce {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.5);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
-
-        .close-btn {
-            font-size: 1.75rem;
-            background: transparent;
-            border-color: transparent;
-            color: var(--clr-primary-5);
-            transition: var(--transition);
-            cursor: pointer;
-            color: var(--clr-red-dark);
-            float: right;
-        }
-
-        .close-btn:hover {
-            color: var(--clr-red-light);
-            transform: rotate(360deg);
-        }
-
-        .logo {
-            justify-self: center;
-            height: 40px;
-        }
-
-        .links a {
-            display: block;
-            font-size: 1.5rem;
-            text-transform: capitalize;
-            padding: 1rem 1.5rem;
-            color: var(--clr-grey-5);
-            transition: var(--transition);
-        }
-
-        .links a:hover {
-            background: var(--clr-primary-8);
-            color: var(--clr-primary-5);
-            padding-left: 1.75rem;
-        }
-
-        .social-icons {
-            justify-self: center;
-            display: flex;
-            padding-bottom: 2rem;
-        }
-
-        .social-icons a {
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            color: var(--clr-primary-5);
-            transition: var(--transition);
-        }
-
-        .social-icons a:hover {
-            color: var(--clr-primary-1);
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            z-index: 1;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0e0e0e;
-            display: grid;
-            grid-template-rows: auto 1fr auto;
-            row-gap: 1rem;
-            box-shadow: var(--clr-red-dark);
-            transition: var(--transition);
-            transform: translate(-100%);
-            overflow-y: scroll;
-        }
-
-        .show-sidebar {
-            transform: translate(0);
-        }
-
-        @media screen and (min-width: 676px) {
             .sidebar {
-                width: 400px;
+                width: 250px;
+                background-color: #343a40;
+                padding: 20px;
+                position: absolute;
             }
-        }
 
-        .image {
-            margin-left: auto;
-            margin-right: auto;
-        }
+            .sidebar a {
+                color: #fff;
+                text-decoration: none;
+                display: block;
+                padding: 10px;
+            }
 
-        .app_header {
-            width: 98%;
-            border-radius: 12px;
-            border: solid white;
-            background-color: #ffffff10;
-            backdrop-filter: blur(12px);
-            height: 62px;
-            justify-content: space-between;
-        }
+            .sidebar a:hover {
+                background-color: #495057;
+            }
+        </style>
+    </head>
 
-        .right {
-            right: 0;
-            float: right;
-            top: 0;
-            position: fixed;
-        }
+    <body>
+        <header class="app_header bg-dark text-white d-flex justify-content-between align-items-center p-3 z-index-3">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="h4"><a href="<?php echo $curr_dir; ?>/index.php" class="text-white text-decoration-none">VPANEL</a></h1>
+            <div>
+                <?php
+                // Assuming a session is already started
+                $id = $_SESSION['id'];
+                $q = "SELECT * FROM `studentinfo` WHERE id = '$id'";
+                $result = mysqli_query($con, $q);
 
-        .app_header_image {
-            width: 56px;
-            border-radius: 100px;
-        }
-
-        a {
-            color: inherit;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="app_header">
-        <button class="sidebar-toggle">
-            <i class="fas fa-bars"></i>
-        </button>
-        <h1><a href="index">VPANEL</a></h1>
-        <br>
-        <div class="right">
-            <?php
-            $id = $_SESSION['id'];
-            $q = "SELECT * FROM `studentinfo` where id = '$id'";
-            $result = mysqli_query($con, $q);
-
-            if ($result) {
-                $num = mysqli_num_rows($result);
-
-                if ($num > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<img class='app_header_image' src='" . $row['photourl'] . "' alt=''>";
-                    }
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    echo "<img class='app_header_image' src='" . $row['photourl'] . "' alt='Profile Picture'>";
                 } else {
-                    echo "No records found for this ID.";
+                    echo "No records found.";
                 }
-            } else {
-                echo "Error executing query: " . mysqli_error($con);
-            }
-            ?>
-            <!-- <img class="app_header_image" src="image.jpeg" alt="hi"> -->
+                ?>
+            </div>
+        </header>
+
+        <div class="sidebar bg-dark text-white" id="sidebar" style="display: none;z-index: 100;">
+            <button class="btn btn-outline-light mb-3" id="sidebarClose">Close</button>
+            <ul class="list-unstyled">
+                <li><a href="<?php echo $curr_dir; ?>/index.php">Home</a></li>
+                <li><a href="<?php echo $curr_dir; ?>/attandance/index.php">Attendance</a></li>
+                <li><a href="<?php echo $curr_dir; ?>/fees/index.php">Academic Fees</a></li>
+                <li><a href="<?php echo $curr_dir; ?>/timeline.php">Academic Notices</a></li>
+                <li><a href="<?php echo $curr_dir; ?>/courceout.php">Course Outline</a></li>
+                <li><a href="<?php echo $curr_dir; ?>/exam/index.php">Exam Timetable</a></li>
+                <li><a href="<?php echo $curr_dir; ?>/repository.php">Repository</a></li>
+            </ul>
         </div>
-    </div>
 
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <button class="close-btn"><i class="fas fa-times"></i></button>
-        </div>
-        <h6 style="text-align: center;">
-            <?php echo $enroll; ?>
-        </h6>
+        <!-- Use dynamic paths for JS scripts -->
+        <script src="<?php echo $curr_dir; ?>/Vendors/bootstrap5/js/bootstrap.js"></script>
+        <script>
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarClose = document.getElementById('sidebarClose');
 
-        <ul class="links">
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/index' ?>">Home</a>
-            </li>
-            <hr>
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/attandance/index' ?>">Attendence</a>
-            </li>
-            <hr>
+            sidebarToggle.addEventListener('click', function () {
+                sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
+            });
 
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/fees/index' ?>">Academic Fees</a>
-            </li>
-            <hr>
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/timeline' ?>">Academic Notices</a>
-            </li>
-            <hr>
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/courceout' ?>">Course Outline</a>
-            </li>
-            <hr>
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/exam/index' ?>">Exam Timetable</a>
-            </li>
-            <hr>
-            <li>
-                <a href="<?php echo 'http://' . $_SERVER['SERVER_NAME'] . '/repository' ?>">repository</a>
-            </li>
-        </ul>
-
-    </aside>
-    <!-- javascript -->
-    <script>
-        const toggleBtn = document.querySelector(".sidebar-toggle");
-        const closeBtn = document.querySelector(".close-btn");
-        const sidebar = document.querySelector(".sidebar");
-
-        toggleBtn.addEventListener("click", function() {
-            // if (sidebar.classList.contains("show-sidebar")) {
-            //   sidebar.classList.remove("show-sidebar");
-            // } else {
-            //   sidebar.classList.add("show-sidebar");
-            // }
-            sidebar.classList.toggle("show-sidebar");
-        });
-
-        closeBtn.addEventListener("click", function() {
-            sidebar.classList.remove("show-sidebar");
-        });
-    </script>
-
-</body>
+            sidebarClose.addEventListener('click', function () {
+                sidebar.style.display = 'none';
+            });
+        </script>
+    </body>
 
 </html>

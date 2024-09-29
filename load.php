@@ -1,40 +1,34 @@
 <?php
+
 session_start();
 $tid = $_SESSION['id'];
 include("function.php");
-$q = "SELECT * FROM studentinfo where id = '$tid'";
-$r2 = mysqli_query($con, $q);
-$r1 = mysqli_num_rows($r2);
-if ($r1 > 0) {
-    while ($row2 = mysqli_fetch_assoc($r2)) {
-        $branch = $row2['branchid'];
-        $sql = "SELECT * FROM classes where branch='$branch'";
-        $result = mysqli_query($con, $sql) or die("SQL Query Failed.");
-        $output = "";
-        if (mysqli_num_rows($result) > 0) {
-            $output = '<table border="0" width="100%" cellspacing="0" cellpadding="10px">
-              <tr>
-              </tr>';
 
-            while ($row = mysqli_fetch_assoc($result)) {
-                $output .= '<td>
-                <a style="color:inherit;" href="classes?id=' . $row['id'] . '">
-                <button class="button1">
-                <div id="classes">
-            ' . $row['teachername'] . '
-                </div>
-                </button>
-                <br>
-                ' . $row['subject'] . '</a>';
-            }
-            $output .= "</table>";
+require_once './Utils/AttandanceHandler.php';
 
-            mysqli_close($con);
+$at = new AttendanceHandler();
+$data = json_decode($at->total_by_Sub($tid), TRUE);
+$output = '';
 
-            echo $output;
-        } else {
-            echo "<h2>No Record Found.</h2>";
-        }
+if (count($data) > 0) {
+    foreach ($data as $row) {
+        $output .= '
+                <tr>
+                    <td>
+                        <a href="classes?id=' . $row['Teacher'] . '">
+                            <button class="button1">
+                                <div id="classes">' . $row['Teacher'] . '</div>
+                            </button>
+                        </a>
+                    </td>
+                    <td>' . $row['Subject'] . '</td>
+                    <td>' . $row['Semester'] . '</td>
+                    <td>' . $row['Present'] . '</td>
+                    <td>' . $row['Absent'] . '</td>
+                    <td class="text text-danger">1</td>
+                </tr>';
     }
+    echo $output;
+} else {
+    echo "<tr><td colspan='4'>No Record Found.</td></tr>";
 }
-?>
