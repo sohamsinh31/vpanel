@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
 // session_start();
 include_once('function.php');
 
@@ -8,8 +11,19 @@ $subfolder = dirname($_SERVER['SCRIPT_NAME']);
 // Get the full current URL and base URL dynamically
 $curr_dir = 'http://' . $_SERVER['SERVER_NAME'] . $subfolder;
 
+// Get the script name, which gives us the path of the current executing script relative to the root
+$script_name = $_SERVER['SCRIPT_NAME']; // e.g., /vpanel/index.php
+// Get the directory name of the current script to extract the project folder (e.g., /vpanel)
+$subfolderr = dirname($script_name); // e.g., /vpanel
+$subfolders = explode("/", $subfolderr)[1];
+
+// Construct the full URL dynamically
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$base_url = $protocol . $_SERVER['SERVER_NAME'] . '/' . $subfolders;
+
 // Normalize base URL by removing potential backslashes at the end
 $curr_dir = rtrim($curr_dir, '/\\');
+$dir = str_replace('\\', '/', __DIR__);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +85,7 @@ $curr_dir = rtrim($curr_dir, '/\\');
 
                 if ($result && mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_assoc($result);
-                    echo "<img class='app_header_image' src='" . $row['photourl'] . "' alt='Profile Picture'>";
+                    echo "<img class='app_header_image' src='" . $base_url . '/' . $row['photourl'] . "' alt='Profile Picture'>";
                 } else {
                     echo "No records found.";
                 }
